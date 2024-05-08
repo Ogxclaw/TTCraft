@@ -15,7 +15,7 @@ public class AFKTask implements Runnable {
 
     @Override
     public void run() {
-        instance.sendConsoleMsg("Checking for AFK players..."); // TODO verbose mode
+        // instance.sendConsoleMsg("Checking for AFK players..."); // TODO: verbose mode
         afkManager.checkPlayers();
     }
     

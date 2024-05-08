@@ -30,7 +30,7 @@ public class AFKManager {
     public static void playerMove(Player player) {
         // long lastMovementTime = lastMovement.get(e.getPlayer());
         
-        if(!player.isInWater() && !player.isSwimming()) { // TODO afk pools, this is a bad solution
+        if(!player.isInWater() && !player.isSwimming()) { // TODO: afk pools, this is a bad solution
             lastMovement.put(player, System.currentTimeMillis());
         }
     }
@@ -58,8 +58,8 @@ public class AFKManager {
                     }
                 });
             }
-            // TODO definitely need verbose mode
-            instance.sendConsoleMsg("Checking " + entry.getKey().getName() + ": " + (System.currentTimeMillis() - lastMovement.get(entry.getKey())));
+            // TODO: definitely need verbose mode
+            // instance.sendConsoleMsg("Checking " + entry.getKey().getName() + ": " + (System.currentTimeMillis() - lastMovement.get(entry.getKey())));
         }
     }
     

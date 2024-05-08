@@ -1,5 +1,5 @@
 package com.kirik.ttcraft.commands;
-
+ 
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
@@ -15,15 +15,16 @@ public class HelpCommand extends ICommand {
 
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        plugin.sendPlayerMessage(player, listPlayerCommands(player));
         
+        // List<Class<? extends ICommand>> commands = Utils.getSubClasses(ICommand.class);
+        StringBuilder cmds = new StringBuilder();
+        cmds.append("Available commands: "); 
+        // TODO: horrible way of going about this, pls fix later (sadly requires a bit of rewriting command system)
+        if(playerManager.getPlayerLevel(player) >= 0)
+            cmds.append("help, home, sethome, setnick, spawn");
+        if(playerManager.getPlayerLevel(player) >= 2)
+            cmds.append(", ban, kick, kickall, setspawn, smite, test");
+        plugin.sendPlayerMessage(player, cmds.toString());
         return true;
-    }
-
-    private String listPlayerCommands(Player player) {
-        StringBuilder commands = new StringBuilder();
-        commands.append("Available commands: ");
-         
-        return "";
     }
 }

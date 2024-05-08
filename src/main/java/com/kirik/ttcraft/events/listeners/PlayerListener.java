@@ -30,8 +30,8 @@ public class PlayerListener implements Listener {
         FileConfiguration _player = new PlayerConfiguration(e.getPlayer().getUniqueId()).getPlayerConfig();
 
         String nickname = _player.getString("nickname");
-        int level = _player.getInt("level");
-        plugin.sendConsoleMsg(nickname + " joined with level: " + level);
+        // int level = _player.getInt("level");
+        // plugin.sendConsoleMsg(nickname + " joined with level: " + level);
 
         // String nickname = plugin.getConfig().getString(playerUUID + ".nickname");
         if(nickname == "" || nickname == null) {

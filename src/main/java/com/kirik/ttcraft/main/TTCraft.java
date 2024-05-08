@@ -4,6 +4,7 @@ import com.kirik.ttcraft.commands.ICommand;
 import com.kirik.ttcraft.events.listeners.AFKListener;
 import com.kirik.ttcraft.events.listeners.PlayerListener;
 import com.kirik.ttcraft.events.managers.AFKManager;
+import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.events.tasks.AFKTask;
 
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ public class TTCraft extends JavaPlugin {
 
     public static TTCraft instance;
     private AFKManager afkManager;
+    private PlayerManager playerManager;
 
     // Dependencies
     /*private ProtocolManager protocolManager;*/
@@ -65,6 +67,7 @@ public class TTCraft extends JavaPlugin {
         }*/
         sendConsoleMsg("Config Defaults Loaded.");
 
+        playerManager = new PlayerManager(this);
         afkManager = new AFKManager(this);
         getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // 1 minute (?)
@@ -105,6 +108,10 @@ public class TTCraft extends JavaPlugin {
     public NameTagManager getNameTagManager() {
         return nameTagManager;
     }*/
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
 
     public void log(String msg) {
         log(Level.INFO, msg);

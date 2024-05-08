@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 @Name("test")
 @Help("Test command for new command system")
 @Usage("/test")
-@Level(0)
+@Level(2)
 public class TestCommand extends ICommand {
 
     @Override

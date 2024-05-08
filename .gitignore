@@ -26,3 +26,8 @@ replay_pid*
 
 # editor files
 .vscode/*
+target/classes/com/kirik/ttcraft/commands/HelpCommand.class
+target/classes/com/kirik/ttcraft/commands/ICommand.class
+target/classes/com/kirik/ttcraft/commands/PluginsCommand.class
+target/classes/com/kirik/ttcraft/commands/TestCommand.class
+target/classes/com/kirik/ttcraft/main/TTCraft.class

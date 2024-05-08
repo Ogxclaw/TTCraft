@@ -22,8 +22,7 @@ public class AFKListener implements Listener {
         afkManager = manager;
     }
 
-    
-
+    //FIXME: 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         afkManager.playerJoined(e.getPlayer());

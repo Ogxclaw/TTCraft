@@ -1,5 +1,5 @@
 name: TTCraft
-version: 1.2.2
+version: 1.3
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
@@ -26,3 +26,9 @@ commands:
   home:
     description: Teleports player to their home
     usage: /home
+  spawn:
+    description: Teleports player to world spawn
+    usage: /spawn
+  setspawn:
+    description: Sets world's spawnpoint
+    usage: /setspawn

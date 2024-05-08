@@ -10,6 +10,7 @@ import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
 import com.kirik.ttcraft.commands.ICommand.Usage;
 import com.kirik.ttcraft.main.PlayerConfiguration;
+import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("setlevel")
@@ -47,7 +48,7 @@ public class SetLevelCommand extends ICommand {
             plugin.sendPlayerMessage(player, "You have set level of " + target.getName() + " to " + level);
             _targetConfig.savePlayerConfig();
         }else{
-            plugin.sendPlayerMessage(player, "Permission denied!");
+            throw new PermissionDeniedException();
         }
         
         return true;

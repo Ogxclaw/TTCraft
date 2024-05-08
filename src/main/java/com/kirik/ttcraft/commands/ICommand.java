@@ -1,6 +1,8 @@
 package com.kirik.ttcraft.commands;
 
+import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
+import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import com.kirik.ttcraft.main.util.Utils;
 import org.bukkit.command.Command;
@@ -21,6 +23,7 @@ public abstract class ICommand implements CommandExecutor {
     @Retention(RetentionPolicy.RUNTIME) public @interface Level { int value(); }
 
     protected static TTCraft plugin = TTCraft.instance;
+    protected static PlayerManager playerManager = plugin.getPlayerManager();
 
     @Override
     public final boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
@@ -33,8 +36,11 @@ public abstract class ICommand implements CommandExecutor {
     }
 
     public boolean onCommandAll(CommandSender commandSender, Command command, String s, String[] args) throws TTCraftCommandException {
-        if(commandSender instanceof Player)
+        if(commandSender instanceof Player){
+            if(!canPlayerUseCommand(commandSender))
+                throw new PermissionDeniedException();
             return onCommandPlayer((Player)commandSender, command, s, args);
+        }
         else
             return onCommandConsole(commandSender, command, s, args);
     }
@@ -66,12 +72,12 @@ public abstract class ICommand implements CommandExecutor {
         }catch(Exception ignored){}
     }
 
-    /*public boolean canPlayerUseCommand(CommandSender commandSender) {
-        final int playerLevel = playerHelper.getPlayerLevel(commandSender);
+    public boolean canPlayerUseCommand(CommandSender commandSender) {
+        final int playerLevel = playerManager.getPlayerLevel((Player)commandSender);
         final int requiredLevel = getRequiredLevel();
 
         return playerLevel >= requiredLevel;
-    }*/
+    }
 
     public String getName() {
         final Name nameAnnotation = this.getClass().getAnnotation(Name.class);
