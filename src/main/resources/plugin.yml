@@ -1,13 +1,16 @@
 name: TTCraft
-version: 1.2
+version: 1.2.1
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
 description: Paper Plugin for Theta Tau Minecraft Server
 commands:
   setnick:
-    description: Sets nickname of the player
+    description: Sets (or resets) nickname of the player
     usage: /setnick <nickname|reset> (color codes start with $)
   test:
     description: Test command
     usage: /test
+  help:
+    description: Lists available commands
+    usage: /help

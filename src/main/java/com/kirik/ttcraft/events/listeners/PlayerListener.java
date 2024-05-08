@@ -1,4 +1,4 @@
-package com.kirik.ttcraft.events;
+package com.kirik.ttcraft.events.listeners;
 
 import com.kirik.ttcraft.main.TTCraft;
 import org.bukkit.entity.Player;

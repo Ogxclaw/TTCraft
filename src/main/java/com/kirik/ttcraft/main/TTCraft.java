@@ -1,7 +1,12 @@
 package com.kirik.ttcraft.main;
 
 import com.kirik.ttcraft.commands.ICommand;
-import com.kirik.ttcraft.events.PlayerListener;
+import com.kirik.ttcraft.events.listeners.AFKListener;
+import com.kirik.ttcraft.events.listeners.PlayerListener;
+import com.kirik.ttcraft.events.managers.AFKManager;
+import com.kirik.ttcraft.events.tasks.AFKTask;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +21,7 @@ import java.util.logging.Level;
 public class TTCraft extends JavaPlugin {
 
     public static TTCraft instance;
+    private AFKManager afkManager;
 
     // Dependencies
     /*private ProtocolManager protocolManager;*/
@@ -59,19 +65,18 @@ public class TTCraft extends JavaPlugin {
         }*/
         sendConsoleMsg("Config Defaults Loaded.");
 
-        sendConsoleMsg("Loading Commands...");
+        afkManager = new AFKManager(this);
+        getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // 1 minute (?)
+        sendConsoleMsg("AFKManager Loaded");
+
         ICommand.registerCommands();
         StateContainer.loadAll();
         sendConsoleMsg("Commands Loaded.");
 
-        sendConsoleMsg("Loading Listeners...");
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-        sendConsoleMsg("Listeners Loaded.");
 
-        sendConsoleMsg("Loading Threads...");
-        /*this.nameTagManager = new NameTagManager(this);*/
-        /*getServer().getScheduler().runTaskAsynchronously(this, updateTask);*/
-        sendConsoleMsg("Threads loaded.");
+        sendConsoleMsg("Listeners Loaded.");
 
         sendConsoleMsg("Plugin enabled");
     }
