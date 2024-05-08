@@ -4,6 +4,7 @@ import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 @Name("kickall")
 @Help("Kicks all players on the server")
@@ -15,7 +16,9 @@ public class KickAllCommand extends ICommand {
     public boolean onCommandAll(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
         // TTPlayer player_ = plugin.onlinePlayers.get(player.getUniqueId());
         String reason = args[0];
-        
+        for(Player player : plugin.getServer().getOnlinePlayers()) {
+            player.kickPlayer(reason);
+        }
         return true;
     }
 }

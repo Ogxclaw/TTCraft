@@ -15,8 +15,15 @@ public class HelpCommand extends ICommand {
 
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        plugin.sendPlayerMessage(player, "Help!");
+        plugin.sendPlayerMessage(player, listPlayerCommands(player));
         
         return true;
+    }
+
+    private String listPlayerCommands(Player player) {
+        StringBuilder commands = new StringBuilder();
+        commands.append("Available commands: ");
+         
+        return "";
     }
 }

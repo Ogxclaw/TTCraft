@@ -24,5 +24,4 @@ hs_err_pid*
 replay_pid*
 
 # editor files
-.vscode/*
-target/*
+target/classes/com/kirik/ttcraft/

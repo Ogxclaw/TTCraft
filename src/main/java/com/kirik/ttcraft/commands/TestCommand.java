@@ -16,7 +16,14 @@ public class TestCommand extends ICommand {
 
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        /*scoreboard.setName("team_test1");
+        
+
+        plugin.sendPlayerMessage(player, "Entity Spawned");
+        return true;
+    }
+}
+
+/*scoreboard.setName("team_test1");
         scoreboard.setMode((byte)0);
         scoreboard.setDisplayName(WrappedChatComponent.fromText(args[0]));
         scoreboard.setColor(ChatColor.RED);
@@ -32,8 +39,3 @@ public class TestCommand extends ICommand {
         }catch(InvocationTargetException e) {
             e.printStackTrace();
         }*/
-
-        plugin.sendPlayerMessage(player, "Entity Spawned");
-        return true;
-    }
-}

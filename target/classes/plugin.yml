@@ -1,5 +1,5 @@
 name: TTCraft
-version: 1.2.1
+version: 1.2.2
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
@@ -14,3 +14,15 @@ commands:
   help:
     description: Lists available commands
     usage: /help
+  setlevel:
+    description: Sets the level of another player
+    usage: /setlevel <player> <level>
+  smite:
+    description: Smite a player (visually)
+    usage: /smite <player>
+  sethome:
+    description: Sets home of the player
+    usage: /sethome
+  home:
+    description: Teleports player to their home
+    usage: /home
