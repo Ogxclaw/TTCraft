@@ -12,7 +12,7 @@ import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("spawn")
 @Help("Sets world's spawnpoint")
-@Usage("/setspawn")
+@Usage("/spawn")
 @Level(0)
 public class SpawnCommand extends ICommand {
 
