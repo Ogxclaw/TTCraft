@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 @Name("kickall")
 @Help("Kicks all players on the server")
-@Usage("/kickall <reason>")
+@Usage("/kickall [reason]")
 @Level(2)
 public class KickAllCommand extends ICommand {
 
@@ -16,6 +16,9 @@ public class KickAllCommand extends ICommand {
     public boolean onCommandAll(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
         // TTPlayer player_ = plugin.onlinePlayers.get(player.getUniqueId());
         String reason = args[0];
+        if(reason.equals("")) {
+            reason = "kicked by " + sender.getName();
+        }
         for(Player player : plugin.getServer().getOnlinePlayers()) {
             player.kickPlayer(reason);
         }

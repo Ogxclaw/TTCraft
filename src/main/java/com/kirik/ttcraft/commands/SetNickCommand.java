@@ -1,10 +1,9 @@
 package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.PlayerConfiguration;
+import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 @Name("setnick")
@@ -15,24 +14,16 @@ public class SetNickCommand extends ICommand {
 
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        PlayerConfiguration _playerConfig = new PlayerConfiguration(player.getUniqueId());
-        FileConfiguration _player = _playerConfig.getPlayerConfig();
         String newNickname = args[0];
+        newNickname = newNickname.replace("$", "\u00a7");
         if(newNickname.equalsIgnoreCase("reset")) {
             newNickname = "";
         }
-        newNickname = newNickname.replace("$", "\u00a7");
-        // player_.setNickname(newNickname);
-        // plugin.getConfig().set(player.getUniqueId().toString() + ".nickname", newNickname);
-        _player.set("nickname", newNickname);
-        player.setPlayerListName(newNickname);
-        player.setDisplayName(newNickname);
-        // plugin.saveConfig();
-        _playerConfig.savePlayerConfig();
+        playerManager.setNickname(player, newNickname);
         if(newNickname == "") {
-            plugin.sendPlayerMessage(player, "Nickname reset!");
+            playerManager.sendMessage(player, "Nickname reset!");
         }else{
-            plugin.sendPlayerMessage(player, "Set nickname to " + newNickname);
+            playerManager.sendMessage(player, "Set nickname to " + newNickname);
         }
         return true;
     }

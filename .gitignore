@@ -31,3 +31,16 @@ target/classes/com/kirik/ttcraft/commands/ICommand.class
 target/classes/com/kirik/ttcraft/commands/PluginsCommand.class
 target/classes/com/kirik/ttcraft/commands/TestCommand.class
 target/classes/com/kirik/ttcraft/main/TTCraft.class
+target/classes/com/kirik/ttcraft/commands/HelpCommand.class
+target/classes/com/kirik/ttcraft/commands/ICommand.class
+target/classes/com/kirik/ttcraft/commands/KickAllCommand.class
+target/classes/com/kirik/ttcraft/commands/SetNickCommand.class
+target/classes/com/kirik/ttcraft/commands/TestCommand.class
+target/classes/com/kirik/ttcraft/commands/WhoCommand.class
+target/classes/com/kirik/ttcraft/main/StateContainer.class
+target/classes/com/kirik/ttcraft/main/StateContainer$Closure.class
+target/classes/com/kirik/ttcraft/main/TTCraft.class
+target/classes/com/kirik/ttcraft/main/util/PermissionDeniedException.class
+target/classes/com/kirik/ttcraft/main/util/TimeUtil.class
+target/classes/com/kirik/ttcraft/main/util/TTCraftCommandException.class
+target/classes/com/kirik/ttcraft/main/util/Utils.class

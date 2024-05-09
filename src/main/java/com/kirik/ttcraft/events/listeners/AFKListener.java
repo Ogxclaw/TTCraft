@@ -1,7 +1,5 @@
 package com.kirik.ttcraft.events.listeners;
 
-import java.util.HashMap;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

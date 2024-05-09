@@ -51,7 +51,7 @@ public abstract class ICommand implements CommandExecutor {
     }
 
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        plugin.sendPlayerMessage(player, "Sorry, this command cannot be used by a player");
+        playerManager.sendMessage(player, "Sorry, this command cannot be used by a player");
         return true;
     }
 
@@ -73,7 +73,7 @@ public abstract class ICommand implements CommandExecutor {
     }
 
     public boolean canPlayerUseCommand(CommandSender commandSender) {
-        final int playerLevel = playerManager.getPlayerLevel((Player)commandSender);
+        final int playerLevel = playerManager.getLevel((Player)commandSender);
         final int requiredLevel = getRequiredLevel();
 
         return playerLevel >= requiredLevel;

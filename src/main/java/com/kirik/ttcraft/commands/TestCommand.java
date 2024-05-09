@@ -18,7 +18,7 @@ public class TestCommand extends ICommand {
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
         
 
-        plugin.sendPlayerMessage(player, "Entity Spawned");
+        playerManager.sendMessage(player, "Entity Spawned");
         return true;
     }
 }

@@ -77,7 +77,7 @@ public class TTCraft extends JavaPlugin {
         StateContainer.loadAll();
         sendConsoleMsg("Commands Loaded.");
 
-        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager), this);
 
         sendConsoleMsg("Listeners Loaded.");
 
@@ -127,16 +127,12 @@ public class TTCraft extends JavaPlugin {
     }
 
     public void sendConsoleMsg(String msg) {
-        msg = "[TT] " + msg;
+        // msg = "[TT] " + msg;
         log(msg);
     }
 
     public void sendConsoleError(String msg){
-        msg = "[ERR][TT]: " + msg;
+        msg = "[ERR]: " + msg;
         log(msg);
-    }
-
-    public void sendPlayerMessage(Player target, String msg) {
-        target.sendMessage("\u00a75[TT] \u00a7f" + msg);
     }
 }

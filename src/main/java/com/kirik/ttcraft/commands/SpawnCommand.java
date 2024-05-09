@@ -11,7 +11,7 @@ import com.kirik.ttcraft.commands.ICommand.Usage;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("spawn")
-@Help("Sets world's spawnpoint")
+@Help("Teleports player to world spawn")
 @Usage("/spawn")
 @Level(0)
 public class SpawnCommand extends ICommand {
@@ -19,13 +19,10 @@ public class SpawnCommand extends ICommand {
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
         
-        Location worldSpawn = plugin.getConfig().getLocation(player.getWorld().getName());
-        if(worldSpawn == null) {
-            worldSpawn = player.getWorld().getSpawnLocation();
-        }
+        Location worldSpawn = plugin.getConfig().getLocation("world");
         player.teleport(worldSpawn);
 
-        plugin.sendPlayerMessage(player, "Spawn set.");
+        playerManager.sendMessage(player, "Teleported to spawn");
         return true;
     }
 }

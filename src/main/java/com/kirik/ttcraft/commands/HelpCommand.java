@@ -16,15 +16,19 @@ public class HelpCommand extends ICommand {
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
         
-        // List<Class<? extends ICommand>> commands = Utils.getSubClasses(ICommand.class);
-        StringBuilder cmds = new StringBuilder();
-        cmds.append("Available commands: "); 
-        // TODO: horrible way of going about this, pls fix later (sadly requires a bit of rewriting command system)
-        if(playerManager.getPlayerLevel(player) >= 0)
-            cmds.append("help, home, sethome, setnick, spawn");
-        if(playerManager.getPlayerLevel(player) >= 2)
-            cmds.append(", ban, kick, kickall, setspawn, smite, test");
-        plugin.sendPlayerMessage(player, cmds.toString());
+        if(args.length == 0) {
+            // List<Class<? extends ICommand>> commands = Utils.getSubClasses(ICommand.class);
+            StringBuilder cmds = new StringBuilder();
+            cmds.append("Available commands: "); 
+            // TODO: horrible way of going about this, pls fix later (sadly requires a bit of rewriting command system)
+            if(playerManager.getLevel(player) >= 0)
+                cmds.append("help, home, sethome, setnick, spawn");
+            if(playerManager.getLevel(player) >= 1)
+                cmds.append("tp");
+            if(playerManager.getLevel(player) >= 2)
+                cmds.append(", ban, banish, kick, kickall, setspawn, smite, summon, test");
+            playerManager.sendMessage(player, cmds.toString());
+        }
         return true;
     }
 }

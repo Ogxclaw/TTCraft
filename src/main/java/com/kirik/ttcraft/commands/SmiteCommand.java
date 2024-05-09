@@ -20,7 +20,7 @@ public class SmiteCommand extends ICommand {
         Player target = plugin.getServer().getPlayer(args[0]);
 
         target.getWorld().strikeLightningEffect(target.getLocation());
-        plugin.sendPlayerMessage(player, "You have smited " + target.getName());
+        plugin.sendServerMessage(playerManager.getNickname(player) + " smited " + playerManager.getNickname(target));
         
         return true;
     }

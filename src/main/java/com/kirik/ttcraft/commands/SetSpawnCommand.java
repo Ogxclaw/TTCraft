@@ -24,7 +24,7 @@ public class SetSpawnCommand extends ICommand {
         plugin.getConfig().set(player.getWorld().getName(), newSpawn);
         plugin.saveConfig();
 
-        plugin.sendPlayerMessage(player, "Spawn set.");
+        playerManager.sendMessage(player, "Spawn set");
         return true;
     }
 }
