@@ -10,13 +10,13 @@ import com.kirik.ttcraft.main.TTCraft;
 
 public class AFKManager {
     
-    private final TTCraft instance;
+    private final TTCraft plugin;
 
     private static final HashMap<Player, Long> lastMovement = new HashMap<Player, Long>();
     private static final long MOVEMENT_THRESHOLD = 600000; // 10 minutes(?)
 
-    public AFKManager(TTCraft instance) {
-        this.instance = instance;
+    public AFKManager(TTCraft plugin) {
+        this.plugin = plugin;
     }
 
     public static void playerJoined(Player player) {
@@ -52,14 +52,13 @@ public class AFKManager {
     public void checkPlayers() {
         for(Map.Entry<Player, Long> entry : lastMovement.entrySet()) {
             if(isAFK(entry.getKey())){
-                Bukkit.getScheduler().runTask(instance, new Runnable() {
+                Bukkit.getScheduler().runTask(plugin, new Runnable() {
                     public void run() {
                         entry.getKey().kickPlayer("AFK");
+                        plugin.sendServerMessage("CONSOLE kicked " + plugin.getPlayerManager().getNickname(entry.getKey()) + " (AFK)");
                     }
                 });
             }
-            // TODO: definitely need verbose mode
-            // instance.sendConsoleMsg("Checking " + entry.getKey().getName() + ": " + (System.currentTimeMillis() - lastMovement.get(entry.getKey())));
         }
     }
     

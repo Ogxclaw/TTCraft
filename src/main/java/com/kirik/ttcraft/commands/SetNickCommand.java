@@ -1,7 +1,6 @@
 package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
