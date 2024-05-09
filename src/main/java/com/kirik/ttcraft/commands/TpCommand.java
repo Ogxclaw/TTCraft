@@ -22,7 +22,7 @@ public class TpCommand extends ICommand {
 
         if(playerManager.getLevel(player) >= playerManager.getLevel(target)) {
             player.teleport(target);
-            plugin.sendServerMessage(playerManager.getNickname(player) + " teleported to " + playerManager.getNickname(target));
+            plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a7fteleported to " + playerManager.getNickname(target));
         }else{
             throw new PermissionDeniedException();
         }

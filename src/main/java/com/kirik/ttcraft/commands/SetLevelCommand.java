@@ -37,7 +37,7 @@ public class SetLevelCommand extends ICommand {
             int level = Integer.parseInt(args[1]);
 
             playerManager.setLevel(target, level);
-            playerManager.sendMessage(player, "You have set level of " + target.getName() + " to " + level);
+            playerManager.sendMessage(player, "You have set level of " + playerManager.getNickname(target) + " \u00a7fto " + level);
         }else throw new PermissionDeniedException();
         
         return true;

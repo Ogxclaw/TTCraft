@@ -18,10 +18,10 @@ public class BanishCommand extends ICommand {
     @Override
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
         Player target = plugin.getServer().getPlayer(args[0]); // TODO: error checking?
-        
+
         if(playerManager.getLevel(player) >= playerManager.getLevel(target)) {
             target.teleport(plugin.getConfig().getLocation("world"));
-            plugin.sendServerMessage(playerManager.getNickname(player) + " banished " + playerManager.getNickname(target));
+            plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a7fbanished " + playerManager.getNickname(target));
         }else{
             throw new PermissionDeniedException();
         }

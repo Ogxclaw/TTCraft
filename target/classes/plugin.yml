@@ -1,43 +1,19 @@
 name: TTCraft
-version: 1.3.1
+version: 1.3.2
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
 description: Paper Plugin for Theta Tau Minecraft Server
 commands:
   setnick:
-    description: Sets (or resets) nickname of the player
-    usage: /setnick <nickname|reset> (color codes start with $)
   test:
-    description: Test command
-    usage: /test
   help:
-    description: Lists available commands
-    usage: /help
   setlevel:
-    description: Sets the level of another player
-    usage: /setlevel <player> <level>
   smite:
-    description: Smite a player (visually)
-    usage: /smite <player>
   sethome:
-    description: Sets home of the player
-    usage: /sethome
   home:
-    description: Teleports player to their home
-    usage: /home
   spawn:
-    description: Teleports player to world spawn
-    usage: /spawn
   setspawn:
-    description: Sets world's spawnpoint
-    usage: /setspawn
   tp:
-    description: Teleports you to another player
-    usage: /tp <player>
   summon:
-    description: Teleports another player to you
-    usage: /summon <player>
   banish:
-    description: Teleports another player to spawn
-    usage: /banish <player>

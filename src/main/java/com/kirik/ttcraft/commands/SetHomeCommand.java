@@ -19,7 +19,7 @@ public class SetHomeCommand extends ICommand {
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
         
         playerManager.setHome(player, player.getLocation());
-        playerManager.sendMessage(player, "Home set!");
+        playerManager.sendMessage(player, "Home set");
         return true;
     }
 }

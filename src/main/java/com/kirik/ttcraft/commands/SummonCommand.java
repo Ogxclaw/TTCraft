@@ -22,7 +22,7 @@ public class SummonCommand extends ICommand {
 
         if(playerManager.getLevel(player) >= playerManager.getLevel(target)) {
             target.teleport(player);
-            plugin.sendServerMessage(playerManager.getNickname(player) + " summoned " + playerManager.getNickname(target));
+            plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a7fsummoned " + playerManager.getNickname(target));
         }else{
             throw new PermissionDeniedException();
         }

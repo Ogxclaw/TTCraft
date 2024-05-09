@@ -22,7 +22,7 @@ public class HomeCommand extends ICommand {
         Location home = playerManager.getHome(player);
         player.teleport(home);
 
-        playerManager.sendMessage(player, "Teleported home!");
+        playerManager.sendMessage(player, "Teleported home");
         return true;
     }
 }
