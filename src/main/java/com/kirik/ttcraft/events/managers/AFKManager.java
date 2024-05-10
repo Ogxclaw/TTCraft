@@ -51,11 +51,13 @@ public class AFKManager {
 
     public void checkPlayers() {
         for(Map.Entry<Player, Long> entry : lastMovement.entrySet()) {
+            if(plugin.playerManager.getLevel(entry.getKey()) >= 2)
+                continue;
             if(isAFK(entry.getKey())){
                 Bukkit.getScheduler().runTask(plugin, new Runnable() {
                     public void run() {
-                        entry.getKey().kickPlayer("AFK");
-                        plugin.sendServerMessage("CONSOLE kicked " + plugin.getPlayerManager().getNickname(entry.getKey()) + " (AFK)");
+                        entry.getKey().kickPlayer("[TT] Kicked by CONSOLE. Reason: AFK");
+                        plugin.sendServerMessage("CONSOLE kicked " + plugin.playerManager.getNickname(entry.getKey()) + " (AFK)");
                     }
                 });
             }

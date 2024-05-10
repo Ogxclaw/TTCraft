@@ -2,7 +2,6 @@ package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
-import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import com.kirik.ttcraft.main.util.Utils;
 import org.bukkit.command.Command;
@@ -23,29 +22,26 @@ public abstract class ICommand implements CommandExecutor {
     @Retention(RetentionPolicy.RUNTIME) public @interface Level { int value(); }
 
     protected static TTCraft plugin = TTCraft.instance;
-    protected static PlayerManager playerManager = plugin.getPlayerManager();
+    protected static PlayerManager playerManager = plugin.playerManager;
 
     @Override
-    public final boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+    public final boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         try {
-            return onCommandAll(commandSender, command, s, args);
+            return run(sender, command, s, args);
         }catch(Exception e){
             plugin.sendConsoleError("Error: "+e.getMessage());
             return false;
         }
     }
 
-    public boolean onCommandAll(CommandSender commandSender, Command command, String s, String[] args) throws TTCraftCommandException {
-        if(commandSender instanceof Player){
-            if(!canPlayerUseCommand(commandSender))
-                throw new PermissionDeniedException();
-            return onCommandPlayer((Player)commandSender, command, s, args);
-        }
+    public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
+        if(sender instanceof Player)
+            return onCommandPlayer((Player)sender, command, s, args);
         else
-            return onCommandConsole(commandSender, command, s, args);
+            return onCommandConsole(sender, command, s, args);
     }
 
-    public boolean onCommandConsole(CommandSender commandSender, Command command, String s, String[] args) throws TTCraftCommandException {
+    public boolean onCommandConsole(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
         plugin.sendConsoleError("Sorry, this command cannot be used by the console");
         return true;
     }
@@ -72,11 +68,22 @@ public abstract class ICommand implements CommandExecutor {
         }catch(Exception ignored){}
     }
 
-    public boolean canPlayerUseCommand(CommandSender commandSender) {
-        final int playerLevel = playerManager.getLevel((Player)commandSender);
+    public boolean playerHasPermission(Player player) {
+        final int playerLevel = playerManager.getLevel(player);
         final int requiredLevel = getRequiredLevel();
 
         return playerLevel >= requiredLevel;
+    }
+
+    public boolean playerHasPermission(Player player, Player target, boolean canBeEquals) {
+        if(!playerHasPermission(player))
+            return false;
+        if((playerManager.getLevel(player) <= playerManager.getLevel(target)) && !canBeEquals)
+            return false;
+        if((playerManager.getLevel(player) < playerManager.getLevel(target)) && canBeEquals)
+            return false;
+        
+        return true;
     }
 
     public String getName() {

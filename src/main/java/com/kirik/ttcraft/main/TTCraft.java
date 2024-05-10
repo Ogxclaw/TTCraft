@@ -21,8 +21,8 @@ import java.util.logging.Level;
 public class TTCraft extends JavaPlugin {
 
     public static TTCraft instance;
-    private AFKManager afkManager;
-    private PlayerManager playerManager;
+    public AFKManager afkManager;
+    public PlayerManager playerManager;
 
     // Dependencies
     /*private ProtocolManager protocolManager;*/
@@ -58,13 +58,13 @@ public class TTCraft extends JavaPlugin {
         afkManager = new AFKManager(this);
         getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute
-        sendConsoleMsg("Managers and Listeners Loaded");
+        sendConsoleMsg("Listeners and Managers Loaded");
 
         ICommand.registerCommands();
+        //commandSystem = new CommandSystem(this);
+        //commandSystem.registerCommands();
         StateContainer.loadAll();
         sendConsoleMsg("Commands Loaded.");
-
-        sendConsoleMsg("Listeners Loaded.");
 
         sendConsoleMsg("Plugin enabled");
     }
@@ -91,10 +91,6 @@ public class TTCraft extends JavaPlugin {
     public NameTagManager getNameTagManager() {
         return nameTagManager;
     }*/
-
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
 
     public void log(String msg) {
         log(Level.INFO, msg);

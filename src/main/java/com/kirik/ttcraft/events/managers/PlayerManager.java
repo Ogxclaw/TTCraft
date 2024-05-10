@@ -1,18 +1,20 @@
 package com.kirik.ttcraft.events.managers;
 
 import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import com.kirik.ttcraft.main.PlayerConfiguration;
 import com.kirik.ttcraft.main.TTCraft;
+import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 public class PlayerManager {
 
-    private final TTCraft instance;
+    private final TTCraft plugin;
 
     public PlayerManager(TTCraft instance) {
-        this.instance = instance;
+        this.plugin = instance;
     }
 
     public int getLevel(Player player) {
@@ -31,7 +33,7 @@ public class PlayerManager {
     public Location getHome(Player player) {
         Location home = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getLocation("home");
         if(home == null) {
-            home = instance.getServer().getWorld("world").getSpawnLocation();
+            home = plugin.getServer().getWorld("world").getSpawnLocation();
         }
         return home;
     }
@@ -61,6 +63,18 @@ public class PlayerManager {
 
     public void sendMessage(Player player, String msg) {
         player.sendMessage("\u00a75[TT] \u00a7f" + msg);
+    }
+
+    public void sendMessage(CommandSender sender, String msg) {
+        sender.sendMessage("\u00a75[TT] \u00a7f" + msg);
+    }
+
+    public void sendException(Player player, TTCraftCommandException exception) {
+        player.sendMessage("\u00a7" + exception.getColor() + "[TT] \u00a7f" + exception.getMessage());
+    }
+
+    public void sendException(CommandSender sender, TTCraftCommandException exception) {
+        sender.sendMessage("\u00a7" + exception.getColor() + "[TT] \u00a7f" + exception.getMessage());
     }
 
     public void savePlayerConfig(Player player) {

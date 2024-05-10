@@ -9,6 +9,7 @@ import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
 import com.kirik.ttcraft.commands.ICommand.Usage;
 import com.kirik.ttcraft.main.util.PermissionDeniedException;
+import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("setlevel")
@@ -18,27 +19,37 @@ import com.kirik.ttcraft.main.util.TTCraftCommandException;
 public class SetLevelCommand extends ICommand {
 
     @Override
-    public boolean onCommandAll(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-        
-        if(!(sender instanceof Player)) {
-            Player target = plugin.getServer().getPlayer(args[0]);
-            int level = Integer.parseInt(args[1]);
+    public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
-            playerManager.setLevel(target, level);
-            playerManager.sendMessage(target, "CONSOLE has set your level to: " + level);
+        String nickname = "CONSOLE";
 
-            return true;
+        Player target = plugin.getServer().getPlayer(args[0]);
+        if(target == null){
+            playerManager.sendException(sender, new PlayerNotFoundException());
+            return false;
         }
 
-        Player player = (Player)sender;
-        Player target = plugin.getServer().getPlayer(args[0]);
+        int level = Integer.parseInt(args[1]);
+        
+        if(sender instanceof Player) {
+            nickname = playerManager.getNickname((Player)sender);
 
-        if(playerManager.getLevel(player) > playerManager.getLevel(target)) {
-            int level = Integer.parseInt(args[1]);
+            if(!playerHasPermission((Player)sender, target, false)) {
+                playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + ((Player)sender).getName() + ": Permission denied on target " + target.getName()));
+                playerManager.sendException(sender, new PermissionDeniedException());
+                return false;
+            }
 
-            playerManager.setLevel(target, level);
-            playerManager.sendMessage(player, "You have set level of " + playerManager.getNickname(target) + " \u00a7fto " + level);
-        }else throw new PermissionDeniedException();
+            if(playerManager.getLevel((Player)sender) <= level) {
+                playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + ((Player)sender).getName() + ": Level exceeds player level"));
+                playerManager.sendException(sender, new PermissionDeniedException());
+                return false;
+            }
+        } 
+
+        playerManager.sendMessage(target, nickname + " has set your level to: " + level);
+        playerManager.setLevel(target, level);
+        playerManager.sendMessage(sender, "You have set level of " + playerManager.getNickname(target) + " \u00a7fto " + level);
         
         return true;
     }

@@ -4,8 +4,10 @@ import com.kirik.ttcraft.commands.ICommand.Name;
 import com.kirik.ttcraft.commands.ICommand.Help;
 import com.kirik.ttcraft.commands.ICommand.Usage;
 import com.kirik.ttcraft.commands.ICommand.Level;
+import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("test")
@@ -15,10 +17,19 @@ import org.bukkit.entity.Player;
 public class TestCommand extends ICommand {
 
     @Override
-    public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        
+    public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
-        playerManager.sendMessage(player, "Entity Spawned");
+        if(sender instanceof Player) {
+            
+            // permission checking (command)
+            if(playerManager.getLevel((Player)sender) <= this.getRequiredLevel()) {
+                playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + ((Player)sender).getName() + ": Permission denied!"));
+                playerManager.sendException(sender, new PermissionDeniedException());
+                return false;
+            }
+        }
+        
+        playerManager.sendMessage(sender, "test executed");
         return true;
     }
 }

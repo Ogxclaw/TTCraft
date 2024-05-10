@@ -12,7 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 @Name("home")
-@Help("Teleports player to their home")
+@Help("Teleport player to their home")
 @Usage("/home")
 @Level(0)
 public class HomeCommand extends ICommand {

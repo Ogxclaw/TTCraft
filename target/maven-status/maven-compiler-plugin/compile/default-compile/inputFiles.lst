@@ -1,6 +1,7 @@
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\AFKManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\HomeCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\TTCraft.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PlayerNotFoundException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetSpawnCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\listeners\AFKListener.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetLevelCommand.java
@@ -20,10 +21,10 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\ut
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\ICommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetHomeCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\TestCommand.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\KickCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\packets\WrapperPlayServerScoreboardTeam.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PermissionDeniedException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\WhoCommand.java
-e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\KickAllCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\AbstractPacket.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\HelpCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\tasks\AFKTask.java

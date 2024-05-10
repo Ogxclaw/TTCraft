@@ -6,7 +6,7 @@
 
     <groupId>com.kirik.ttcraft</groupId>
     <artifactId>TTCraft</artifactId>
-    <version>1.3.2</version>
+    <version>1.3.3</version>
     <packaging>jar</packaging>
 
     <name>TTCraft</name>

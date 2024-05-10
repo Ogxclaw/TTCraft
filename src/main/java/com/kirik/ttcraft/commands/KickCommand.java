@@ -1,27 +1,24 @@
 package com.kirik.ttcraft.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import com.kirik.ttcraft.commands.ICommand.Help;
-import com.kirik.ttcraft.commands.ICommand.Level;
-import com.kirik.ttcraft.commands.ICommand.Name;
-import com.kirik.ttcraft.commands.ICommand.Usage;
+import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
-@Name("smite")
-@Help("Smite a player (visually)")
-@Usage("/smite <player>")
-@Level(2)
-public class SmiteCommand extends ICommand {
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-    @Override
+@Name("kick")
+@Help("Kick player on the server")
+@Usage("/kick <player> [reason]")
+@Level(2)
+public class KickCommand extends ICommand {
+
     public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
         String nickname = "CONSOLE";
+        StringBuilder reason = new StringBuilder();
 
         Player target = plugin.getServer().getPlayer(args[0]);
         if(target == null){
@@ -37,11 +34,21 @@ public class SmiteCommand extends ICommand {
                 playerManager.sendException(sender, new PermissionDeniedException());
                 return false;
             }
+
         }
 
-        target.getWorld().strikeLightningEffect(target.getLocation());
-        plugin.sendServerMessage(nickname + " \u00a7fsmited " + playerManager.getNickname(target));
-        
+        for(String w : args)
+            reason.append(w + " ");
+        reason = new StringBuilder(reason.substring(target.getName().length()+1, reason.length()-1)); // remove username arg & trailing " "
+
+        String kickReason;
+        if(args.length == 0)
+            kickReason = "Kicked by " + nickname;
+        else
+            kickReason = "Kicked by " + nickname + " \u00a7f(" + reason.toString() + ")";
+
+        target.kickPlayer(kickReason);
+        plugin.sendServerMessage(nickname + " kicked " + playerManager.getNickname(target) + " \u00a7f(" + reason.toString() + ")");
         return true;
     }
 }

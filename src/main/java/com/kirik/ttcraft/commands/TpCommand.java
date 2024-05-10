@@ -5,6 +5,7 @@ import com.kirik.ttcraft.commands.ICommand.Help;
 import com.kirik.ttcraft.commands.ICommand.Usage;
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.main.util.PermissionDeniedException;
+import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -19,13 +20,19 @@ public class TpCommand extends ICommand {
     public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
 
         Player target = plugin.getServer().getPlayer(args[0]);
-
-        if(playerManager.getLevel(player) >= playerManager.getLevel(target)) {
-            player.teleport(target);
-            plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a7fteleported to " + playerManager.getNickname(target));
-        }else{
-            throw new PermissionDeniedException();
+        if(target == null){
+            playerManager.sendException(player, new PlayerNotFoundException());
+            return false;
         }
+
+        if(!playerHasPermission(player, target, true)) {
+            playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied on target " + target.getName()));
+            playerManager.sendException(player, new PermissionDeniedException());
+            return false;
+        }
+
+        player.teleport(target);
+        plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a7fteleported to " + playerManager.getNickname(target));
         return true;
     }
 }
