@@ -9,50 +9,50 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class PlayerConfiguration {
 
-    private UUID uuid;
-    private File playerData;
-    private FileConfiguration playerDataConfig;
-    private TTCraft _instance = TTCraft.instance;
+	private UUID uuid;
+	private File playerData;
+	private FileConfiguration playerDataConfig;
+	private TTCraft _instance = TTCraft.instance;
 
-    public PlayerConfiguration(UUID uuid) {
-        setUUID(uuid);
+	public PlayerConfiguration(UUID uuid) {
+		setUUID(uuid);
 
-        playerData = new File(_instance.getDataFolder() + "/players/", uuid + ".yml");
-        playerDataConfig = YamlConfiguration.loadConfiguration(playerData);
-    }
-    
-    public void createPlayerConfig() {
-        try {
-            playerData.createNewFile();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
+		playerData = new File(_instance.getDataFolder() + "/players/", uuid + ".yml");
+		playerDataConfig = YamlConfiguration.loadConfiguration(playerData);
+	}
 
-    public void createPlayerDefaults() {
-        if(playerData.length() <= 0) {
-            playerDataConfig.set("level", 0);
-        }
-    }
+	public void createPlayerConfig() {
+		try {
+			playerData.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public FileConfiguration getPlayerConfig() {
-        return playerDataConfig;
-    }
+	public void createPlayerDefaults() {
+		if (playerData.length() <= 0) {
+			playerDataConfig.set("level", 0);
+		}
+	}
 
-    public void savePlayerConfig() {
-        try {
-            getPlayerConfig().save(playerData);
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
+	public FileConfiguration getPlayerConfig() {
+		return playerDataConfig;
+	}
 
-    public UUID getUUID() {
-        return uuid;
-    }
+	public void savePlayerConfig() {
+		try {
+			getPlayerConfig().save(playerData);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
-    }
-    
+	public UUID getUUID() {
+		return uuid;
+	}
+
+	public void setUUID(UUID uuid) {
+		this.uuid = uuid;
+	}
+
 }

@@ -11,29 +11,28 @@ import com.kirik.ttcraft.main.TTCraft;
 
 public class AFKListener implements Listener {
 
-    private final TTCraft plugin;
-    private final AFKManager afkManager;
-    
+	private final TTCraft plugin;
+	private final AFKManager afkManager;
 
-    public AFKListener(TTCraft plugin, AFKManager manager) {
-        this.plugin = plugin;
-        afkManager = manager;
-    }
+	public AFKListener(TTCraft plugin, AFKManager manager) {
+		this.plugin = plugin;
+		afkManager = manager;
+	}
 
-    //FIXME: 
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e) {
-        afkManager.playerJoined(e.getPlayer());
-    }
+	// FIXME:
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent e) {
+		afkManager.playerJoined(e.getPlayer());
+	}
 
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent e) {
-        afkManager.playerQuit(e.getPlayer());
-    }
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent e) {
+		afkManager.playerQuit(e.getPlayer());
+	}
 
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e) {
-        afkManager.playerMove(e.getPlayer());
-    }
-    
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent e) {
+		afkManager.playerMove(e.getPlayer());
+	}
+
 }

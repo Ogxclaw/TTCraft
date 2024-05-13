@@ -7,20 +7,20 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
-@Name("home")
-@Level(0)
-public class HomeCommand extends ICommand {
+@Name("back")
+@Level(2)
+public class BackCommand extends ICommand {
 
 	@Override
 	public boolean asPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
 
-		Location home = playerManager.getHome(player);
-		Location lastLoc = player.getLocation();
+		if (!checkPermissions(player))
+			return true;
 
-		playerManager.setLastLocation(player, lastLoc);
-		player.teleport(home);
+		Location lastLoc = playerManager.getLastLocation(player);
 
-		playerManager.sendMessage(player, "Teleported home");
+		player.teleport(lastLoc);
+		playerManager.sendMessage(player, "Sent back to last location");
 		return true;
 	}
 }

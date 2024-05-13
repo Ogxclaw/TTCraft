@@ -3,11 +3,13 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\command
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\TTCraft.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PlayerNotFoundException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetSpawnCommand.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\BackCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\listeners\AFKListener.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetLevelCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\StateContainer.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SmiteCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\listeners\PlayerListener.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\InventoryManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\PlayerManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\PlayerConfiguration.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\Utils.java
@@ -15,9 +17,11 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\command
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SpawnCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SummonCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\TpCommand.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\WorldManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\TimeUtil.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\packets\WrapperPlayServerSpawnEntity.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\TTCraftCommandException.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\GoToCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\ICommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetHomeCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\TestCommand.java
@@ -26,6 +30,7 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\packets
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PermissionDeniedException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\WhoCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\AbstractPacket.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SayCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\HelpCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\tasks\AFKTask.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetNickCommand.java

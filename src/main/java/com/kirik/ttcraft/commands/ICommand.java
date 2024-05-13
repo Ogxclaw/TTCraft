@@ -2,6 +2,7 @@ package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
+import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import com.kirik.ttcraft.main.util.Utils;
 import org.bukkit.command.Command;
@@ -16,103 +17,134 @@ import java.util.List;
 
 public abstract class ICommand implements CommandExecutor {
 
-    @Retention(RetentionPolicy.RUNTIME) public @interface Name { String value(); }
-    @Retention(RetentionPolicy.RUNTIME) public @interface Help { String value(); }
-    @Retention(RetentionPolicy.RUNTIME) public @interface Usage { String value(); }
-    @Retention(RetentionPolicy.RUNTIME) public @interface Level { int value(); }
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface Name {
+		String value();
+	}
 
-    protected static TTCraft plugin = TTCraft.instance;
-    protected static PlayerManager playerManager = plugin.playerManager;
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface Level {
+		int value();
+	}
 
-    @Override
-    public final boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        try {
-            return run(sender, command, s, args);
-        }catch(Exception e){
-            plugin.sendConsoleError("Error: "+e.getMessage());
-            return false;
-        }
-    }
+	protected static TTCraft plugin = TTCraft.instance;
+	protected static PlayerManager playerManager = plugin.playerManager;
 
-    public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-        if(sender instanceof Player)
-            return onCommandPlayer((Player)sender, command, s, args);
-        else
-            return onCommandConsole(sender, command, s, args);
-    }
+	@Override
+	public final boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+		try {
+			return run(sender, command, s, args);
+		} catch (Exception e) {
+			plugin.sendConsoleError("Error: " + e.getMessage());
+			return false;
+		}
+	}
 
-    public boolean onCommandConsole(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-        plugin.sendConsoleError("Sorry, this command cannot be used by the console");
-        return true;
-    }
+	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
+		if (sender instanceof Player)
+			return asPlayer((Player) sender, command, s, args);
+		else
+			return onCommandConsole(sender, command, s, args);
+	}
 
-    public boolean onCommandPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
-        playerManager.sendMessage(player, "Sorry, this command cannot be used by a player");
-        return true;
-    }
+	public boolean onCommandConsole(CommandSender sender, Command command, String s, String[] args)
+			throws TTCraftCommandException {
+		plugin.sendConsoleError("Sorry, this command cannot be used by the console");
+		return true;
+	}
 
-    public static void registerCommands() {
-        List<Class<? extends ICommand>> commands = Utils.getSubClasses(ICommand.class);
-        for(Class<? extends ICommand> command : commands) {
-            registerCommand(command);
-        }
-    }
+	public boolean asPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
+		playerManager.sendMessage(player, "Sorry, this command cannot be used by a player");
+		return true;
+	}
 
-    private static void registerCommand(Class<? extends ICommand> commandClass) {
-        try {
-            Constructor<? extends ICommand> ctor = commandClass.getConstructor();
-            ICommand command = ctor.newInstance();
-            if(!commandClass.isAnnotationPresent(Name.class))
-                return;
-            plugin.getCommand(commandClass.getAnnotation(Name.class).value()).setExecutor(command);
-        }catch(Exception ignored){}
-    }
+	public static void registerCommands() {
+		List<Class<? extends ICommand>> commands = Utils.getSubClasses(ICommand.class);
+		for (Class<? extends ICommand> command : commands) {
+			registerCommand(command);
+		}
+	}
 
-    public boolean playerHasPermission(Player player) {
-        final int playerLevel = playerManager.getLevel(player);
-        final int requiredLevel = getRequiredLevel();
+	private static void registerCommand(Class<? extends ICommand> commandClass) {
+		try {
+			Constructor<? extends ICommand> ctor = commandClass.getConstructor();
+			ICommand command = ctor.newInstance();
+			if (!commandClass.isAnnotationPresent(Name.class))
+				return;
+			plugin.getCommand(commandClass.getAnnotation(Name.class).value()).setExecutor(command);
+		} catch (Exception ignored) {
+		}
+	}
 
-        return playerLevel >= requiredLevel;
-    }
+	public boolean checkPermissions(Player player) {
+		final int playerLevel = playerManager.getLevel(player);
+		final int requiredLevel = getRequiredLevel();
 
-    public boolean playerHasPermission(Player player, Player target, boolean canBeEquals) {
-        if(!playerHasPermission(player))
-            return false;
-        if((playerManager.getLevel(player) <= playerManager.getLevel(target)) && !canBeEquals)
-            return false;
-        if((playerManager.getLevel(player) < playerManager.getLevel(target)) && canBeEquals)
-            return false;
-        
-        return true;
-    }
+		if (playerLevel < requiredLevel) {
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
+					"Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
+			playerManager.sendException(player, new PermissionDeniedException());
+			return false;
+		}
+		return true;
+	}
 
-    public String getName() {
-        final Name nameAnnotation = this.getClass().getAnnotation(Name.class);
-        if(nameAnnotation == null)
-            return "";
+	public boolean checkPermissions(Player player, int level) {
+		final int playerLevel = playerManager.getLevel(player);
 
-        return nameAnnotation.value();
-    }
+		if (playerLevel < level) {
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
+					"Command /" + this.getName() + " failed by " + player.getName() + ": Level exceeds player level"));
+			playerManager.sendException(player, new PermissionDeniedException());
+			return false;
+		}
 
-    public final String getHelp() {
-        final Help helpAnnotation = this.getClass().getAnnotation(Help.class);
-        if(helpAnnotation == null)
-            return "";
-        return helpAnnotation.value();
-    }
+		return true;
+	}
 
-    public final String getUsage() {
-        final Usage usageAnnotation = this.getClass().getAnnotation(Usage.class);
-        if(usageAnnotation == null)
-            return "";
-        return usageAnnotation.value();
-    }
+	public boolean checkPermissions(Player player, Player target, boolean canBeEquals) {
+		final int playerLevel = playerManager.getLevel(player);
+		final int targetLevel = playerManager.getLevel(target);
+		final int requiredLevel = getRequiredLevel();
 
-    public final int getRequiredLevel() {
-        final Level levelAnnotation = this.getClass().getAnnotation(Level.class);
-        if(levelAnnotation == null)
-            throw new UnsupportedOperationException("You need either a GetMinLevel method or an @Level annotation");
-        return levelAnnotation.value();
-    }
+		if (playerLevel < requiredLevel) {
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
+					"Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
+			playerManager.sendException(player, new PermissionDeniedException());
+			return false;
+		}
+
+		if ((playerLevel <= targetLevel) && !canBeEquals) {
+			playerManager.sendException(plugin.getServer().getConsoleSender(),
+					new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName()
+							+ ": Permission denied on target " + target.getName()));
+			playerManager.sendException(player, new PermissionDeniedException());
+			return false;
+		}
+
+		if ((playerLevel < targetLevel) && canBeEquals) {
+			playerManager.sendException(plugin.getServer().getConsoleSender(),
+					new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName()
+							+ ": Permission denied on target " + target.getName()));
+			playerManager.sendException(player, new PermissionDeniedException());
+			return false;
+		}
+		return true;
+	}
+
+	public String getName() {
+		final Name nameAnnotation = this.getClass().getAnnotation(Name.class);
+		if (nameAnnotation == null)
+			return "";
+
+		return nameAnnotation.value();
+	}
+
+	public final int getRequiredLevel() {
+		final Level levelAnnotation = this.getClass().getAnnotation(Level.class);
+		if (levelAnnotation == null)
+			throw new UnsupportedOperationException("You need either a GetMinLevel method or an @Level annotation");
+		return levelAnnotation.value();
+	}
 
 }

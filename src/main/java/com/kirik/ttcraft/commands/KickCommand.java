@@ -1,7 +1,6 @@
 package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
@@ -10,45 +9,44 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("kick")
-@Help("Kick player on the server")
-@Usage("/kick <player> [reason]")
 @Level(2)
 public class KickCommand extends ICommand {
 
-    public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
+	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
-        String nickname = "CONSOLE";
-        StringBuilder reason = new StringBuilder();
+		if (args.length > 0) {
 
-        Player target = plugin.getServer().getPlayer(args[0]);
-        if(target == null){
-            playerManager.sendException(sender, new PlayerNotFoundException());
-            return false;
-        }
-        
-        if(sender instanceof Player) {
-            nickname = playerManager.getNickname((Player)sender);
+			String nickname = "CONSOLE";
+			StringBuilder reason = new StringBuilder();
 
-            if(!playerHasPermission((Player)sender, target, true)) {
-                playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + ((Player)sender).getName() + ": Permission denied on target " + target.getName()));
-                playerManager.sendException(sender, new PermissionDeniedException());
-                return false;
-            }
+			Player target = plugin.getServer().getPlayer(args[0]);
+			if (target == null) {
+				playerManager.sendException(sender, new PlayerNotFoundException());
+				return true;
+			}
 
-        }
+			if (sender instanceof Player) {
+				nickname = playerManager.getNickname((Player) sender);
 
-        for(String w : args)
-            reason.append(w + " ");
-        reason = new StringBuilder(reason.substring(target.getName().length()+1, reason.length()-1)); // remove username arg & trailing " "
+				if (!checkPermissions((Player) sender, target, true))
+					return true;
+			}
 
-        String kickReason;
-        if(args.length == 0)
-            kickReason = "Kicked by " + nickname;
-        else
-            kickReason = "Kicked by " + nickname + " \u00a7f(" + reason.toString() + ")";
+			for (String w : args)
+				reason.append(w + " ");
+			reason = new StringBuilder(reason.substring(target.getName().length() + 1, reason.length() - 1));
 
-        target.kickPlayer(kickReason);
-        plugin.sendServerMessage(nickname + " kicked " + playerManager.getNickname(target) + " \u00a7f(" + reason.toString() + ")");
-        return true;
-    }
+			String kickReason;
+			if (args.length == 1)
+				kickReason = "Kicked by " + nickname;
+			else
+				kickReason = "Kicked by " + nickname + " \u00a7f(" + reason.toString() + ")";
+
+			target.kickPlayer(kickReason);
+			plugin.sendServerMessage(nickname + " \u00a7f kicked " + playerManager.getNickname(target) + " \u00a7f("
+					+ reason.toString() + ")");
+			return true;
+		} else
+			return false;
+	}
 }

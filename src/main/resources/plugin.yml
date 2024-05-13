@@ -1,20 +1,58 @@
 name: TTCraft
-version: 1.3.3
+version: 1.4
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
 description: Paper Plugin for Theta Tau Minecraft Server
 commands:
+  back:
+    description: Teleport player to last saved location
+    usage: /back
   banish:
+    description: Teleport another player to spawn
+    usage: /banish [target]
+  goto:
+    description: Teleport player between creative and survival worlds
+    usage: /goto [creative|survival]
   help:
+    description: Display available commands or command information
+    usage: /help <command>
   home:
+    description: Teleport player to their home
+    usage: /home
   kick:
+    description: Kick player from server
+    usage: /kick [player] <reason> 
+  say:
+    description: Send message through console
+    usage: /say [message]
   sethome:
+    description: Set player home
+    usage: /sethome
   setlevel:
+    description: Set player plugin level
+    usage: /setlevel [player] [level]
   setnick:
+    description: Set player nickname
+    usage: /setnick <player> [nickname]
   setspawn:
+    description: Set world spawnpoint at player location
+    usage: /setspawn
   smite:
+    description: Smite a player (visually)
+    usage: /smite [player]
   spawn:
+    description: Teleport player to spawn
+    usage: /spawn
   summon:
+    description: Teleport target to player
+    usage: /summon [target]
   test:
+    description: Test command
+    usage: /test
   tp:
+    description: Teleport player to target
+    usage: /tp [target]
+  who:
+    description: Display player info
+    usage: /who [player]
