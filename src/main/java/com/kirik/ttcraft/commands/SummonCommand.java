@@ -18,12 +18,11 @@ public class SummonCommand extends ICommand {
 		Player target = plugin.getServer().getPlayer(args[0]);
 		if (target == null) {
 			playerManager.sendException(player, new PlayerNotFoundException());
-			return false;
+			return true;
 		}
 
-		if (!checkPermissions(player, target, false)) {
-			return false;
-		}
+		if (!checkPermissions(player, target, false))
+			return true;
 
 		Location targetLastLoc = target.getLocation();
 		playerManager.setLastLocation(target, targetLastLoc);

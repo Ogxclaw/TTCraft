@@ -14,9 +14,8 @@ public class SetSpawnCommand extends ICommand {
 	@Override
 	public boolean asPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
 
-		if (!checkPermissions(player)) {
-			return false;
-		}
+		if (!checkPermissions(player))
+			return true;
 
 		Location newSpawn = player.getLocation();
 		player.getWorld().setSpawnLocation(newSpawn); // redunant, but better than it bugging out

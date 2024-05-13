@@ -22,6 +22,8 @@ public class WhoCommand extends ICommand {
 		 * }
 		 */
 
+		// FIXME: this is backwards compared to literally all other commands
+		// its also poorly coded
 		if (args.length == 0) {
 			StringBuilder players = new StringBuilder();
 			for (Player player : plugin.getServer().getOnlinePlayers()) {
@@ -50,7 +52,7 @@ public class WhoCommand extends ICommand {
 				if (target == null) {
 					plugin.sendConsoleMsg("target was null");
 					playerManager.sendException(sender, new PlayerNotFoundException());
-					return false;
+					return true;
 				}
 			}
 

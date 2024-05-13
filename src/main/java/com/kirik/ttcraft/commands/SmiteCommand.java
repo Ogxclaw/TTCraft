@@ -17,25 +17,27 @@ public class SmiteCommand extends ICommand {
 
 		// FIXME: index 0 out of bounds for length 0
 
-		String nickname = "CONSOLE";
+		if (args.length > 0) {
+			String nickname = "CONSOLE";
 
-		Player target = plugin.getServer().getPlayer(args[0]);
-		if (target == null) {
-			playerManager.sendException(sender, new PlayerNotFoundException());
-			return false;
-		}
-
-		if (sender instanceof Player) {
-			nickname = playerManager.getNickname((Player) sender);
-
-			if (!checkPermissions((Player) sender, target, true)) {
-				return false;
+			Player target = plugin.getServer().getPlayer(args[0]);
+			if (target == null) {
+				playerManager.sendException(sender, new PlayerNotFoundException());
+				return true;
 			}
-		}
 
-		target.getWorld().strikeLightningEffect(target.getLocation());
-		plugin.sendServerMessage(nickname + " \u00a7fsmited " + playerManager.getNickname(target));
+			if (sender instanceof Player) {
+				nickname = playerManager.getNickname((Player) sender);
 
-		return true;
+				if (!checkPermissions((Player) sender, target, true))
+					return false;
+			}
+
+			target.getWorld().strikeLightningEffect(target.getLocation());
+			plugin.sendServerMessage(nickname + " \u00a7fsmited " + playerManager.getNickname(target));
+
+			return true;
+		} else
+			return false;
 	}
 }

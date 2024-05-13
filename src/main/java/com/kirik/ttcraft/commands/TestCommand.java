@@ -1,11 +1,9 @@
 package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 @Name("test")
 @Level(2)
@@ -13,18 +11,6 @@ public class TestCommand extends ICommand {
 
 	@Override
 	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-
-		if (sender instanceof Player) {
-
-			// permission checking (command)
-			if (playerManager.getLevel((Player) sender) <= this.getRequiredLevel()) {
-				playerManager.sendException(plugin.getServer().getConsoleSender(),
-						new PermissionDeniedException("Command /" + this.getName() + " failed by "
-								+ ((Player) sender).getName() + ": Permission denied!"));
-				playerManager.sendException(sender, new PermissionDeniedException());
-				return true;
-			}
-		}
 
 		playerManager.sendMessage(sender, "test executed");
 		return true;

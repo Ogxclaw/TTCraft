@@ -21,9 +21,8 @@ public class TpCommand extends ICommand {
 			return true;
 		}
 
-		if (!checkPermissions(player, target, true)) {
+		if (!checkPermissions(player, target, true))
 			return true;
-		}
 
 		Location lastLoc = player.getLocation();
 		playerManager.setLastLocation(player, lastLoc);

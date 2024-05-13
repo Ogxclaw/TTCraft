@@ -18,7 +18,7 @@ public class SayCommand extends ICommand {
 
 			if (sender instanceof Player)
 				if (!checkPermissions((Player) sender))
-					return false;
+					return true;
 
 			StringBuilder message = new StringBuilder();
 			for (String piece : args)
@@ -27,7 +27,7 @@ public class SayCommand extends ICommand {
 
 			plugin.getServer().broadcastMessage("\u00a7d[CONSOLE] " + message);
 			return true;
-		} else 
+		} else
 			return false;
 	}
 }

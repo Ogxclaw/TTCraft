@@ -17,20 +17,22 @@ public class SetNickCommand extends ICommand {
 		String nickname = "CONSOLE";
 		String targetNickname;
 
-		Player target = plugin.getServer().getPlayer(args[0]);
-		if (target == null) {
-			playerManager.sendException(sender, new PlayerNotFoundException());
-			return true;
-		}
-
 		if (sender instanceof Player) {
 			nickname = playerManager.getNickname((Player) sender);
-
-			if (!checkPermissions((Player) sender, target, false))
-				return true;
 		}
 
 		if (args.length > 1) {
+
+			Player target = plugin.getServer().getPlayer(args[0]);
+			if (target == null) {
+				playerManager.sendException(sender, new PlayerNotFoundException());
+				return true;
+			}
+
+			if (sender instanceof Player) {
+				if (!checkPermissions((Player) sender, target, false))
+					return true;
+			}
 
 			targetNickname = args[1];
 			targetNickname = targetNickname.replace("$", "\u00a7");
@@ -42,9 +44,7 @@ public class SetNickCommand extends ICommand {
 			else
 				plugin.sendServerMessage(
 						nickname + " \u00a7fset nickname of " + target.getName() + "\u00a7f to " + targetNickname);
-		}
-
-		if (args.length > 0 && (sender instanceof Player)) {
+		} else if (args.length > 0 && (sender instanceof Player)) {
 
 			targetNickname = args[0];
 			targetNickname = targetNickname.replace("$", "\u00a7");
@@ -59,6 +59,6 @@ public class SetNickCommand extends ICommand {
 			}
 			return true;
 		}
-		return true;
+		return false;
 	}
 }
