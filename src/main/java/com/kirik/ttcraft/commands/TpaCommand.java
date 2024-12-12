@@ -12,7 +12,7 @@ import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("tpa")
-@Level(0)
+@Level(1)
 public class TpaCommand extends ICommand {
 
 	@Override
@@ -40,14 +40,8 @@ public class TpaCommand extends ICommand {
 			@Override
 			public void accept() {
 				Location prevLoc = byPlayer.getLocation();
-				playerManager.sendMessage(byPlayer, "Please wait 3 seconds for teleportation");
-				playerManager.sendMessage(forPlayer, "Please wait 3 seconds for teleportation");
-				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-					public void run() {
-						playerManager.setLastLocation(byPlayer, prevLoc);
-						byPlayer.teleport(forPlayer);
-					}
-				}, 60L);
+				playerManager.setLastLocation(byPlayer, prevLoc);
+				byPlayer.teleport(forPlayer);
 				playerManager.sendMessage(byPlayer, "Your teleportation request was accepted!");
 			}
 

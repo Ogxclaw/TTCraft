@@ -18,13 +18,7 @@ public class BackCommand extends ICommand {
 			return true;
 
 		Location lastLoc = playerManager.getLastLocation(player);
-
-		playerManager.sendMessage(player, "Please wait 3 seconds for teleportation");
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run() {
-				player.teleport(lastLoc);
-			}
-		}, 60L);
+		player.teleport(lastLoc);
 		playerManager.sendMessage(player, "Sent back to last location");
 		return true;
 	}

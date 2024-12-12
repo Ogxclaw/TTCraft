@@ -27,13 +27,7 @@ public class SpawnCommand extends ICommand {
 		playerManager.setLastLocation(player, lastLoc);
 
 		playerManager.sendMessage(player, "Please wait 3 seconds for teleportation");
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-
-			public void run() {
-				player.teleport(worldSpawn);
-			}
-
-		}, 60L);
+		player.teleport(worldSpawn);
 
 		playerManager.sendMessage(player, "Teleported to spawn");
 		return true;

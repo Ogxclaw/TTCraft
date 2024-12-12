@@ -1,7 +1,7 @@
 name: TTCraft
-version: 2.0
+version: 2.1
 main: com.kirik.ttcraft.main.TTCraft
-api-version: 1.19
+api-version: 1.21
 authors: [Kazzius]
 description: Paper Plugin for Theta Tau Minecraft Server
 commands:
@@ -11,9 +11,6 @@ commands:
   banish:
     description: Teleport another player to spawn
     usage: /banish [target]
-  goto:
-    description: Teleport player between creative and survival worlds
-    usage: /goto [creative|survival]
   help:
     description: Display available commands or command information
     usage: /help <command>

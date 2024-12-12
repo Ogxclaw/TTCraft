@@ -9,7 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 @Name("tp")
-@Level(2)
+@Level(1)
 public class TpCommand extends ICommand {
 
 	@Override
@@ -22,10 +22,8 @@ public class TpCommand extends ICommand {
 				return true;
 			}
 
-			if (!checkPermissions(player, target, true)) {
-				playerManager.sendMessage(player, "Please use /tpa [player]");
+			if (!checkPermissions(player, target, true))
 				return true;
-			}
 
 			Location lastLoc = player.getLocation();
 			playerManager.setLastLocation(player, lastLoc);

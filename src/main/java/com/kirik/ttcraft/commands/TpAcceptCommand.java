@@ -10,7 +10,7 @@ import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("tpaccept")
-@Level(0)
+@Level(1)
 public class TpAcceptCommand extends ICommand {
 
 	@Override

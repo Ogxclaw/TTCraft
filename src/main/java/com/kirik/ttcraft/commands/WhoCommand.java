@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("who")
-@Level(0)
+@Level(2)
 public class WhoCommand extends ICommand {
 
 	@Override
