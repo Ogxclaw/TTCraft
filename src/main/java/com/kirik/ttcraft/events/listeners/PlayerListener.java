@@ -4,6 +4,7 @@ import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
 
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -90,6 +91,18 @@ public class PlayerListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		if (e.getEntity().getRespawnLocation().getWorld().getName().startsWith("world")) {
 			e.getEntity().setGameMode(GameMode.SURVIVAL);
+		}
+	}
+
+	@EventHandler
+	public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
+		if(e.getPlayer().getWorld().getName().contains("end")) {
+
+			Location targetLastLoc = e.getPlayer().getLocation();
+			playerManager.setLastLocation(e.getPlayer(), targetLastLoc);
+
+			e.getPlayer().teleport(plugin.getConfig().getLocation("world"));
+			plugin.sendServerMessage("\u00a7fCONSOLE banished " + playerManager.getNickname(e.getPlayer()));
 		}
 	}
 }

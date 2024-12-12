@@ -51,9 +51,10 @@ public class TTCraft extends JavaPlugin {
 
 		worldManager = new WorldManager(this);
 
+		// TODO dep/remove afkmanager, disabled for now
 		afkManager = new AFKManager(this);
 		getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
-		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute
+		// Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute
 		sendConsoleMsg("Listeners and Managers Loaded");
 
 		ICommand.registerCommands();
@@ -74,7 +75,7 @@ public class TTCraft extends JavaPlugin {
 	}
 
 	public void setDefaultMOTD() {
-		getConfig().set("MOTD", "Welcome back to $5123$fSMP!");
+		getConfig().set("MOTD", "Welcome back to $5123$fSMP!"); // TODO: player name?
 		saveConfig();
 	}
 
