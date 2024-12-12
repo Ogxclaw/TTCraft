@@ -24,15 +24,8 @@ public class WhoCommand extends ICommand {
 
 		// FIXME: this is backwards compared to literally all other commands
 		// its also poorly coded
-		if (args.length == 0) {
-			StringBuilder players = new StringBuilder();
-			for (Player player : plugin.getServer().getOnlinePlayers()) {
-				players.append(playerManager.getNickname(player) + ", ");
-			}
-			players = new StringBuilder(players.substring(0, players.length() - 2));
-			playerManager.sendMessage(sender, "Online players: " + players.toString());
-			return true;
-		} else {
+		if (args.length > 0) {
+
 			Player target = plugin.getServer().getPlayer(args[0]);
 			StringBuilder info = new StringBuilder("Player info: ");
 			if (target == null) {
@@ -58,19 +51,16 @@ public class WhoCommand extends ICommand {
 
 			info.append("\u00a7fUsername: " + target.getName());
 			info.append("\u00a7fNickname: " + playerManager.getNickname(target));
+			return true;
+		} else {
 
-			/*
-			 * if(level < playerManager.getLevel(target)) {
-			 * playerManager.sendException(plugin.getServer().getConsoleSender(), new
-			 * PermissionDeniedException("Command /" + this.getName() + " failed by " +
-			 * ((Player)sender).getName() + ": Permission denied on target " +
-			 * target.getName()));
-			 * playerManager.sendException(sender, new PermissionDeniedException());
-			 * return false;
-			 * }
-			 */
-
+			StringBuilder players = new StringBuilder();
+			for (Player player : plugin.getServer().getOnlinePlayers()) {
+				players.append(playerManager.getNickname(player) + ", ");
+			}
+			players = new StringBuilder(players.substring(0, players.length() - 2));
+			playerManager.sendMessage(sender, "Online players: " + players.toString());
+			return true;
 		}
-		return true;
 	}
 }

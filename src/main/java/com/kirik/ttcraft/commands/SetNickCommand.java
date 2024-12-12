@@ -44,6 +44,7 @@ public class SetNickCommand extends ICommand {
 			else
 				plugin.sendServerMessage(
 						nickname + " \u00a7fset nickname of " + target.getName() + "\u00a7f to " + targetNickname);
+			return true;
 		} else if (args.length > 0 && (sender instanceof Player)) {
 
 			targetNickname = args[0];

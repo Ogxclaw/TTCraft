@@ -1,5 +1,5 @@
 name: TTCraft
-version: 1.4
+version: 2.0
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.19
 authors: [Kazzius]
@@ -53,6 +53,15 @@ commands:
   tp:
     description: Teleport player to target
     usage: /tp [target]
+  tpa:
+    description: Send teleport request to player
+    usage: /tpa [target]
+  tpaccept:
+    description: Accept teleport request from player
+    usage: /tpaccept <player>
+  tpdeny:
+    description: Decline teleport request from player
+    usage: /tpdeny <player>
   who:
     description: Display player info
     usage: /who [player]

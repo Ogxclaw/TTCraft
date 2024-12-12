@@ -1,5 +1,6 @@
 package com.kirik.ttcraft.commands;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -15,6 +16,13 @@ public class GoToCommand extends ICommand {
 
 	@Override
 	public boolean asPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
+
+		/*
+		 * FIXME:
+		 * 
+		 * Current abuse possibilities:
+		 * - Player death
+		 */
 
 		if (args.length > 0) {
 
@@ -33,7 +41,9 @@ public class GoToCommand extends ICommand {
 
 				worldLoc = playerManager.getLastWorldLocation(player, "creative");
 				worldInv = playerManager.getWorldInventory(player, "creative");
-				// worldEChest = playerManager.getWorldEnderChest(player, "creative");
+				worldEChest = playerManager.getWorldEnderChest(player, "creative");
+
+				player.setGameMode(GameMode.CREATIVE);
 
 				playerManager.sendMessage(player, "Teleported to \u00a79Creative");
 
@@ -45,7 +55,9 @@ public class GoToCommand extends ICommand {
 
 				worldLoc = playerManager.getLastWorldLocation(player, "world");
 				worldInv = playerManager.getWorldInventory(player, "world");
-				// worldEChest = playerManager.getWorldEnderChest(player, "world");
+				worldEChest = playerManager.getWorldEnderChest(player, "world");
+
+				player.setGameMode(GameMode.SURVIVAL);
 
 				playerManager.sendMessage(player, "Teleported to \u00a7cSurvival");
 
@@ -58,6 +70,7 @@ public class GoToCommand extends ICommand {
 			player.teleport(worldLoc);
 
 			player.getInventory().setContents(worldInv);
+			player.getEnderChest().setContents(worldEChest);
 
 			// player.getInventory().setArmorContents(plugin.inventoryManager.getInventory(player,
 			// "world").get("armor"));

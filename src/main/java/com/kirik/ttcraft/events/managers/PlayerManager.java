@@ -1,7 +1,5 @@
 package com.kirik.ttcraft.events.managers;
 
-import java.util.List;
-
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -70,8 +68,13 @@ public class PlayerManager {
 	}
 
 	public ItemStack[] getWorldEnderChest(Player player, String worldName) {
-		ItemStack[] inv = (ItemStack[]) new PlayerConfiguration(player.getUniqueId()).getPlayerConfig()
-				.get(worldName + ".echest");
+		ItemStack[] inv = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig()
+				.getList(worldName + ".echest").toArray(new ItemStack[0]);
+
+		if (inv == null) {
+			setWorldInventory(player, worldName);
+			inv = getWorldInventory(player, worldName);
+		}
 		return inv;
 	}
 

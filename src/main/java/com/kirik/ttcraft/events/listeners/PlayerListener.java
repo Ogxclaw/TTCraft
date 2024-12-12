@@ -3,8 +3,10 @@ package com.kirik.ttcraft.events.listeners;
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
 
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 public class PlayerListener implements Listener {
@@ -81,6 +83,13 @@ public class PlayerListener implements Listener {
 			e.setFormat("\u00a79[C]\u00a77 " + nickname + "\u00a7f: " + colorMessage);
 		} else {
 			e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
+		}
+	}
+
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent e) {
+		if (e.getEntity().getRespawnLocation().getWorld().getName().startsWith("world")) {
+			e.getEntity().setGameMode(GameMode.SURVIVAL);
 		}
 	}
 }

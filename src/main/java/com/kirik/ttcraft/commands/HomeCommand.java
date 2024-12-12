@@ -18,7 +18,15 @@ public class HomeCommand extends ICommand {
 		Location lastLoc = player.getLocation();
 
 		playerManager.setLastLocation(player, lastLoc);
-		player.teleport(home);
+
+		playerManager.sendMessage(player, "Please wait 3 seconds for teleportation");
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+
+			public void run() {
+				player.teleport(home);
+			}
+
+		}, 60L);
 
 		playerManager.sendMessage(player, "Teleported home");
 		return true;

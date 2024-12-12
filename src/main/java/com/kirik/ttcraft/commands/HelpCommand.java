@@ -33,19 +33,20 @@ public class HelpCommand extends ICommand {
 				level = playerManager.getLevel((Player) sender);
 
 			StringBuilder cmds = new StringBuilder();
-			cmds.append("Note: You can use /help [command] to see description and usage of command");
 			cmds.append("Available commands: ");
 
 			// FIXME: horrible way of going about this, pls fix later (sadly requires a bit
 			// of rewriting command system)
 			// TODO: update
 			if (level >= 0)
-				cmds.append("help, home, sethome, setnick, spawn");
+				cmds.append("help, home, sethome, setnick, spawn, tpa, tpaccept, tpdeny");
 			if (level >= 1)
-				cmds.append(", tp");
+				cmds.append(", goto");
 			if (level >= 2)
-				cmds.append(", back, ban, banish, kick, say, setlevel, setspawn, smite, summon, test");
-			
+				cmds.append(", back, ban, banish, kick, say, setlevel, setspawn, smite, summon, test, tp");
+
+			playerManager.sendMessage(sender,
+					"Note: You can use /help [command] to see description and usage of command");
 			playerManager.sendMessage(sender, cmds.toString());
 			return true;
 		}

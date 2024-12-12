@@ -15,7 +15,7 @@ public class BanishCommand extends ICommand {
 
 	@Override
 	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-		
+
 		if (args.length > 0) {
 
 			String nickname = "CONSOLE";
