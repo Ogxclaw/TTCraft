@@ -37,12 +37,12 @@ public class HelpCommand extends ICommand {
 			// TODO: update
 			if (level >= 0) {
 				playerManager.sendMessage(sender,
-						"Note: You can use /help [command] to see description and usage of command");
-				playerManager.sendMessage(sender, "/help - this command home, sethome, setnick, spawn");
-				playerManager.sendMessage(sender, "/home - teleport player to their home");
-				playerManager.sendMessage(sender, "/sethome - set player home");
-				playerManager.sendMessage(sender, "/setnick - set your nickname");
-				playerManager.sendMessage(sender, "/spawn - teleport player to server spawn");
+						"Note: You can use \u00a7d/help [command] \u00a7fto see description and usage of command");
+				playerManager.sendMessage(sender, "\u00a7d/help \u00a7f- this command");
+				playerManager.sendMessage(sender, "\u00a7d/home \u00a7f- teleport player to their home");
+				playerManager.sendMessage(sender, "\u00a7d/sethome \u00a7f- set player home");
+				playerManager.sendMessage(sender, "\u00a7d/setnick \u00a7f- set your nickname");
+				playerManager.sendMessage(sender, "\u00a7d/spawn \u00a7f- teleport player to server spawn");
 			}
 			if (level >= 2)
 				playerManager.sendMessage(sender,", back, ban, banish, kick, say, setlevel, setspawn, smite, summon, test, tp");

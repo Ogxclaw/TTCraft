@@ -28,7 +28,7 @@ public class PlayerManager {
 		if (playerNickname == null) {
 			return player.getName();
 		}
-		return playerNickname;
+		return playerNickname + "\u00a7f";
 	}
 
 	public Location getHome(Player player) {
@@ -99,6 +99,7 @@ public class PlayerManager {
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set("home", home);
 		playerConfigFile.savePlayerConfig();
+		
 	}
 
 	public void setLastLocation(Player player, Location lastLoc) {

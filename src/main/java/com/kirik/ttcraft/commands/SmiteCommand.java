@@ -34,7 +34,7 @@ public class SmiteCommand extends ICommand {
 			}
 
 			target.getWorld().strikeLightningEffect(target.getLocation());
-			plugin.sendServerMessage(nickname + " \u00a7fsmited " + playerManager.getNickname(target));
+			plugin.sendServerMessage(nickname + " smited " + playerManager.getNickname(target));
 
 			return true;
 		} else

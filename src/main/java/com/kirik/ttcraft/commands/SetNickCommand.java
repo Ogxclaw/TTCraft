@@ -21,7 +21,7 @@ public class SetNickCommand extends ICommand {
 			nickname = playerManager.getNickname((Player) sender);
 		}
 
-		if (args.length > 1) {
+		if (args.length > 1) { // targeting another player
 
 			Player target = plugin.getServer().getPlayer(args[0]);
 			if (target == null) {
@@ -40,12 +40,11 @@ public class SetNickCommand extends ICommand {
 				targetNickname = "";
 			playerManager.setNickname(target, targetNickname);
 			if (targetNickname == "")
-				plugin.sendServerMessage(nickname + " \u00a7freset nickname of " + target.getName());
+				plugin.sendServerMessage(nickname + " reset nickname of " + target.getName());
 			else
-				plugin.sendServerMessage(
-						nickname + " \u00a7fset nickname of " + target.getName() + "\u00a7f to " + targetNickname);
+				plugin.sendServerMessage(nickname + " set nickname of " + target.getName() + " to " + targetNickname);
 			return true;
-		} else if (args.length > 0 && (sender instanceof Player)) {
+		} else if (args.length > 0 && (sender instanceof Player)) { // targeting yourself
 
 			targetNickname = args[0];
 			targetNickname = targetNickname.replace("$", "\u00a7");

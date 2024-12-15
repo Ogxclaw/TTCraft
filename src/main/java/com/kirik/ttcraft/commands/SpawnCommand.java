@@ -17,16 +17,7 @@ public class SpawnCommand extends ICommand {
 		worldSpawn.setWorld(plugin.getServer().getWorld("world"));
 		Location lastLoc = player.getLocation();
 
-		/*
-		 * if (player.getWorld().getName().startsWith("world"))
-		 * plugin.getConfig().getLocation("world");
-		 * else if (player.getWorld().getName().startsWith("creative"))
-		 * plugin.getServer().getWorld("creative").getSpawnLocation();
-		 */
-
 		playerManager.setLastLocation(player, lastLoc);
-
-		playerManager.sendMessage(player, "Please wait 3 seconds for teleportation");
 		player.teleport(worldSpawn);
 
 		playerManager.sendMessage(player, "Teleported to spawn");

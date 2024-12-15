@@ -37,8 +37,7 @@ public class SetLevelCommand extends ICommand {
 					return true;
 			}
 
-			plugin.sendServerMessage(
-					nickname + " \u00a7fset level of " + playerManager.getNickname(target) + " \u00a7fto: " + level);
+			plugin.sendServerMessage(nickname + " set level of " + playerManager.getNickname(target) + " to: " + level);
 			playerManager.setLevel(target, level);
 			return true;
 		} else

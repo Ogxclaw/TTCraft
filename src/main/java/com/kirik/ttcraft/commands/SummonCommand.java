@@ -29,7 +29,7 @@ public class SummonCommand extends ICommand {
 
 		target.teleport(player);
 		plugin.sendServerMessage(
-				playerManager.getNickname(player) + " \u00a7fsummoned " + playerManager.getNickname(target));
+				playerManager.getNickname(player) + " summoned " + playerManager.getNickname(target));
 		return true;
 	}
 }

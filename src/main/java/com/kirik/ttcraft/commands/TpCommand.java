@@ -9,7 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 @Name("tp")
-@Level(1)
+@Level(2)
 public class TpCommand extends ICommand {
 
 	@Override

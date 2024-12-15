@@ -37,7 +37,7 @@ public class BanishCommand extends ICommand {
 			playerManager.setLastLocation(target, targetLastLoc);
 
 			target.teleport(plugin.getConfig().getLocation("world"));
-			plugin.sendServerMessage(nickname + " \u00a7fbanished " + playerManager.getNickname(target));
+			plugin.sendServerMessage(nickname + " banished " + playerManager.getNickname(target));
 			return true;
 		} else
 			return false;

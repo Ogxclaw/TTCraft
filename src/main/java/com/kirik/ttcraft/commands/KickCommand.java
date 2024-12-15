@@ -40,10 +40,10 @@ public class KickCommand extends ICommand {
 			if (args.length == 1)
 				kickReason = "Kicked by " + nickname;
 			else
-				kickReason = "Kicked by " + nickname + " \u00a7f(" + reason.toString() + ")";
+				kickReason = "Kicked by " + nickname + " (" + reason.toString() + ")";
 
 			target.kickPlayer(kickReason);
-			plugin.sendServerMessage(nickname + " \u00a7f kicked " + playerManager.getNickname(target) + " \u00a7f("
+			plugin.sendServerMessage(nickname + " kicked " + playerManager.getNickname(target) + " ("
 					+ reason.toString() + ")");
 			return true;
 		} else

@@ -12,7 +12,7 @@ import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("tpa")
-@Level(1)
+@Level(2)
 public class TpaCommand extends ICommand {
 
 	@Override
@@ -25,10 +25,10 @@ public class TpaCommand extends ICommand {
 				return true;
 			}
 
-			playerManager.sendMessage(player, "Sending teleport request to " + target.getDisplayName() + "\u00a7f...");
+			playerManager.sendMessage(player, "Sending teleport request to " + target.getDisplayName() + "...");
 			requestTeleport(player, target,
 					player.getDisplayName()
-							+ " \u00a7fwants to teleport to you! Use \u00a75/tpaccept \u00a7for \u00a75/tpdeny");
+							+ " wants to teleport to you! Use \u00a75/tpaccept \u00a7for \u00a75/tpdeny");
 			return true;
 		} else
 			return false;

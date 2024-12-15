@@ -1,5 +1,5 @@
 name: TTCraft
-version: 2.1
+version: 2.2
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.21
 authors: [Kazzius]
@@ -31,7 +31,7 @@ commands:
     usage: /setlevel [player] [level]
   setnick:
     description: Set player nickname
-    usage: /setnick <player> [nickname]
+    usage: /setnick [nickname]
   setspawn:
     description: Set world spawnpoint at player location
     usage: /setspawn
@@ -47,6 +47,9 @@ commands:
   test:
     description: Test command
     usage: /test
+  time:
+    description: Set time of the server (global)
+    usage: /time [dawn|morning|day|evening|dusk|night]
   tp:
     description: Teleport player to target
     usage: /tp [target]
@@ -59,6 +62,9 @@ commands:
   tpdeny:
     description: Decline teleport request from player
     usage: /tpdeny <player>
+  weather:
+    description: set weather on the server (global)
+    usage: /weather [clear|rain|thunderstorm]
   who:
     description: Display player info
     usage: /who [player]

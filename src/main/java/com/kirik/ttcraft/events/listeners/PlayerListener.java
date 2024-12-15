@@ -3,8 +3,8 @@ package com.kirik.ttcraft.events.listeners;
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
 
-import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -22,31 +22,30 @@ public class PlayerListener implements Listener {
 
 	@EventHandler()
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		String nickname = playerManager.getNickname(e.getPlayer());
-		if (nickname == "" || nickname == null) {
-			nickname = e.getPlayer().getName();
+		Player player = e.getPlayer();
+
+		if(!player.hasPlayedBefore()) { // make sure no first time spawn shenanigans
+			Location worldSpawn = player.getWorld().getSpawnLocation();
+			player.teleport(worldSpawn);
 		}
 
-		e.setJoinMessage("\u00a72[+] \u00a77" + nickname + " \u00a7ejoined!");
-		e.getPlayer().setPlayerListName(nickname);
-		e.getPlayer().setDisplayName(nickname);
+		String nickname = playerManager.getNickname(player);
+		if (nickname == "" || nickname == null) {
+			nickname = player.getName();
+		}
 
-		if (e.getPlayer().getWorld().getName().startsWith("world"))
-			playerManager.setWorldInventory(e.getPlayer(), "world");
-		else if (e.getPlayer().getWorld().getName().startsWith("creative"))
-			playerManager.setWorldInventory(e.getPlayer(), "creative");
+		/* int level = playerManager.getLevel(player);
+		if (level >= 2) {
+			player.p
+		} */
+
+		e.setJoinMessage("\u00a72[+] \u00a77" + nickname + " \u00a7ejoined!");
+		player.setPlayerListName(nickname);
+		player.setDisplayName(nickname);
 
 		String[] motd = plugin.getMOTD().replace("$", "\u00a7").split("(nl)");
 		for (String motdPiece : motd)
-			playerManager.sendMessage(e.getPlayer(), motdPiece);
-
-		if (e.getPlayer().getWorld().getName().startsWith("world")) {
-			playerManager.sendMessage(e.getPlayer(), "You are currently on world: \u00a7cSurvival");
-		} else if (e.getPlayer().getWorld().getName().startsWith("creative")) {
-			playerManager.sendMessage(e.getPlayer(), "You are currently on world: \u00a79Creative");
-		} else {
-			playerManager.sendMessage(e.getPlayer(), "Current world: \u00a74NULL\u00a7f, please report this bug!");
-		}
+			playerManager.sendMessage(player, motdPiece);
 	}
 
 	@EventHandler
@@ -56,47 +55,25 @@ public class PlayerListener implements Listener {
 		e.setQuitMessage("\u00a74[-] \u00a77" + playerManager.getNickname(e.getPlayer()) + " \u00a7edisconnected!");
 	}
 
-	// Don't think I need this anymore since kick/ban commands will send server
-	// messages
-	/*
-	 * @EventHandler
-	 * public void onPlayerKick(PlayerKickEvent e) {
-	 * FileConfiguration _player = new
-	 * PlayerConfiguration(e.getPlayer().getUniqueId()).getPlayerConfig();
-	 * 
-	 * String nickname = _player.getString("nickname");
-	 * if(nickname == "" || nickname == null) {
-	 * nickname = e.getPlayer().getName();
-	 * }
-	 * 
-	 * e.setLeaveMessage("\u00a74[-] \u00a77" + nickname + " \u00a7ekicked! (" +
-	 * e.getReason() + ")");
-	 * }
-	 */
-
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		String nickname = playerManager.getNickname(e.getPlayer());
 
 		String colorMessage = e.getMessage().replace("$", "\u00a7");
 
-		if (e.getPlayer().getWorld().getName().startsWith("creative")) {
-			e.setFormat("\u00a79[C]\u00a77 " + nickname + "\u00a7f: " + colorMessage);
-		} else {
-			e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
-		}
+		e.setFormat("\u00a77" + nickname + ": " + colorMessage);
 	}
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
-		if (e.getEntity().getRespawnLocation().getWorld().getName().startsWith("world")) {
+		/* if (e.getEntity().getRespawnLocation().getWorld().getName().startsWith("world")) {
 			e.getEntity().setGameMode(GameMode.SURVIVAL);
-		}
+		} */
 	}
 
 	@EventHandler
 	public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
-		if(e.getPlayer().getWorld().getName().contains("end")) {
+		if (e.getPlayer().getWorld().getName().contains("end")) {
 
 			Location targetLastLoc = e.getPlayer().getLocation();
 			playerManager.setLastLocation(e.getPlayer(), targetLastLoc);
