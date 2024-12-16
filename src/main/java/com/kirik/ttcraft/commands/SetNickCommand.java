@@ -71,6 +71,7 @@ public class SetNickCommand extends ICommand {
 		List<String> list = new ArrayList<>();
 		if(args.length == 1) {
 			list.add("[nickname]");
+			list.add("reset");
 			if(playerManager.getLevel((Player) sender) >= 1) {
 				for(Player p : plugin.getServer().getOnlinePlayers()) {
 					list.add(p.getName());
@@ -78,6 +79,7 @@ public class SetNickCommand extends ICommand {
 			}
 		}else if (args.length == 2 && playerManager.getLevel((Player)sender) >= 1) {
 			list.add("[nickname]");
+			list.add("reset");
 		}
 		return list;
 	}

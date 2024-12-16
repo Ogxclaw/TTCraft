@@ -1,8 +1,6 @@
 package com.kirik.ttcraft.events.managers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
