@@ -26,7 +26,7 @@ public class PlayerManager {
 	public String getNickname(Player player) {
 		String playerNickname = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getString("nickname");
 		if (playerNickname == null) {
-			return player.getName();
+			return player.getName() + "\u00a7f";
 		}
 		return playerNickname + "\u00a7f";
 	}

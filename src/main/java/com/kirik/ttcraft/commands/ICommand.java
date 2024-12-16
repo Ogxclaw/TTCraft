@@ -1,22 +1,23 @@
 package com.kirik.ttcraft.commands;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
+
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.main.TTCraft;
 import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import com.kirik.ttcraft.main.util.Utils;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Constructor;
-import java.util.List;
-
-public abstract class ICommand implements CommandExecutor/* , TabCompleter  */{
+public abstract class ICommand implements TabExecutor/* , TabCompleter */ {
 
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Name {
@@ -82,8 +83,7 @@ public abstract class ICommand implements CommandExecutor/* , TabCompleter  */{
 		final int requiredLevel = getRequiredLevel();
 
 		if (playerLevel < requiredLevel) {
-			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
-					"Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
 			playerManager.sendException(player, new PermissionDeniedException());
 			return false;
 		}
@@ -94,8 +94,7 @@ public abstract class ICommand implements CommandExecutor/* , TabCompleter  */{
 		final int playerLevel = playerManager.getLevel(player);
 
 		if (playerLevel < level) {
-			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
-					"Command /" + this.getName() + " failed by " + player.getName() + ": Level exceeds player level"));
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Level exceeds player level"));
 			playerManager.sendException(player, new PermissionDeniedException());
 			return false;
 		}
@@ -109,24 +108,21 @@ public abstract class ICommand implements CommandExecutor/* , TabCompleter  */{
 		final int requiredLevel = getRequiredLevel();
 
 		if (playerLevel < requiredLevel) {
-			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException(
-					"Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
+			playerManager.sendException(plugin.getServer().getConsoleSender(), new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied!"));
 			playerManager.sendException(player, new PermissionDeniedException());
 			return false;
 		}
 
 		if ((playerLevel <= targetLevel) && !canBeEquals) {
 			playerManager.sendException(plugin.getServer().getConsoleSender(),
-					new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName()
-							+ ": Permission denied on target " + target.getName()));
+					new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied on target " + target.getName()));
 			playerManager.sendException(player, new PermissionDeniedException());
 			return false;
 		}
 
 		if ((playerLevel < targetLevel) && canBeEquals) {
 			playerManager.sendException(plugin.getServer().getConsoleSender(),
-					new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName()
-							+ ": Permission denied on target " + target.getName()));
+				new PermissionDeniedException("Command /" + this.getName() + " failed by " + player.getName() + ": Permission denied on target " + target.getName()));
 			playerManager.sendException(player, new PermissionDeniedException());
 			return false;
 		}
@@ -146,6 +142,12 @@ public abstract class ICommand implements CommandExecutor/* , TabCompleter  */{
 		if (levelAnnotation == null)
 			throw new UnsupportedOperationException("You need either a GetMinLevel method or an @Level annotation");
 		return levelAnnotation.value();
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		return list;
 	}
 
 }

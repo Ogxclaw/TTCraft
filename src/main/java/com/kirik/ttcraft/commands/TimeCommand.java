@@ -2,6 +2,10 @@ package com.kirik.ttcraft.commands;
 
 import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -48,5 +52,17 @@ public class TimeCommand extends ICommand {
 		}
 
 		return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		list.add("dawn");
+		list.add("morning");
+		list.add("day");
+		list.add("evening");
+		list.add("dusk");
+		list.add("night");
+		return list;
 	}
 }

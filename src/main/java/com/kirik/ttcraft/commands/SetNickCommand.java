@@ -3,6 +3,10 @@ package com.kirik.ttcraft.commands;
 import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -60,5 +64,21 @@ public class SetNickCommand extends ICommand {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		if(args.length == 1) {
+			list.add("[nickname]");
+			if(playerManager.getLevel((Player) sender) >= 1) {
+				for(Player p : plugin.getServer().getOnlinePlayers()) {
+					list.add(p.getName());
+				}
+			}
+		}else if (args.length == 2 && playerManager.getLevel((Player)sender) >= 1) {
+			list.add("[nickname]");
+		}
+		return list;
 	}
 }

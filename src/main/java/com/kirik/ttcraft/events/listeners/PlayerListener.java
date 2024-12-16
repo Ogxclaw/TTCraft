@@ -61,7 +61,7 @@ public class PlayerListener implements Listener {
 
 		String colorMessage = e.getMessage().replace("$", "\u00a7");
 
-		e.setFormat("\u00a77" + nickname + ": " + colorMessage);
+		e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
 	}
 
 	@EventHandler

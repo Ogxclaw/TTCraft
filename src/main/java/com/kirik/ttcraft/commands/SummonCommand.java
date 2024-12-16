@@ -4,8 +4,12 @@ import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("summon")
@@ -31,5 +35,14 @@ public class SummonCommand extends ICommand {
 		plugin.sendServerMessage(
 				playerManager.getNickname(player) + " summoned " + playerManager.getNickname(target));
 		return true;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		for(Player p : plugin.getServer().getOnlinePlayers()) {
+			list.add(p.getName());
+		}
+		return list;
 	}
 }

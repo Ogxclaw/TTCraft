@@ -39,7 +39,7 @@ public class WeatherCommand extends ICommand {
 				plugin.getServer().getWorld("world").setThunderDuration(24000);
 				plugin.sendServerMessage(nickname + " set weather to thunderstorm");
 			}else{
-				playerManager.sendMessage(sender, "Usage: " + plugin.getCommand("weather").getUsage());
+				playerManager.sendMessage(sender, "Usage: " + plugin.getCommand("weather").getUsage()); 
 			}
 			return true;
 		}else{
@@ -49,12 +49,12 @@ public class WeatherCommand extends ICommand {
 		return false;
 	}
 	
-	/* @Override
+	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
 		List<String> list = new ArrayList<>();
 		list.add("clear");
 		list.add("rain");
 		list.add("thunderstorm");
 		return list;
-	} */
+	}
 }

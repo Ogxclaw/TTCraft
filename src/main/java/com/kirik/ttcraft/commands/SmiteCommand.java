@@ -1,5 +1,8 @@
 package com.kirik.ttcraft.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,5 +42,14 @@ public class SmiteCommand extends ICommand {
 			return true;
 		} else
 			return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		for (Player p : plugin.getServer().getOnlinePlayers()) {
+			list.add(p.getName());
+		}
+		return list;
 	}
 }

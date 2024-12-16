@@ -4,6 +4,9 @@ import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,7 +32,7 @@ public class BanishCommand extends ICommand {
 			if (sender instanceof Player) {
 				nickname = playerManager.getNickname((Player) sender);
 
-				if (!checkPermissions((Player) sender, target, false))
+				if (!checkPermissions((Player) sender, target, true))
 					return true;
 			}
 
@@ -41,5 +44,14 @@ public class BanishCommand extends ICommand {
 			return true;
 		} else
 			return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
+		List<String> list = new ArrayList<>();
+		for(Player p : plugin.getServer().getOnlinePlayers()) {
+			list.add(p.getName());
+		}
+		return list;
 	}
 }
