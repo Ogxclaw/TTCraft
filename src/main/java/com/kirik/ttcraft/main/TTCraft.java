@@ -1,18 +1,18 @@
 package com.kirik.ttcraft.main;
 
+import java.util.logging.Level;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.kirik.ttcraft.commands.ICommand;
-import com.kirik.ttcraft.events.listeners.AFKListener;
 import com.kirik.ttcraft.events.listeners.PlayerListener;
 import com.kirik.ttcraft.events.managers.AFKManager;
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.events.managers.WorldManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Level;
 
 /**
- * TTCraft is a custom plugin for basic
- * commands for the TT Minecraft server
+ * TTCraft is a custom plugin 
+ * for the TT Minecraft server
  * 
  * @author Kazzius
  */
@@ -37,27 +37,27 @@ public class TTCraft extends JavaPlugin {
 			setDefaultMOTD();
 			sendConsoleMsg("MOTD was NULL, loading default!");
 		}
-		sendConsoleMsg("Config Defaults Loaded.");
-
+		sendConsoleMsg("Config Defaults Loaded");
+/* 
 		if (this.getServer().getWorld("creative") == null) {
 			this.sendConsoleMsg("[INFO]: Creative world does not exist, creating...");
-		}
+		} */
 
 		playerManager = new PlayerManager(this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager), this);
 
 		worldManager = new WorldManager(this);
 
-		// TODO dep/remove afkmanager, disabled for now
-		afkManager = new AFKManager(this);
+		// TODO: dep/remove afkmanager, disabled for now
+		/* afkManager = new AFKManager(this);
 		getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
-		// Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute
+		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute */
 		sendConsoleMsg("Listeners and Managers Loaded");
 
 		ICommand.registerCommands();
 		StateContainer.loadAll();
 
-		sendConsoleMsg("Commands Loaded.");
+		sendConsoleMsg("Commands Loaded");
 		sendConsoleMsg("Plugin enabled");
 	}
 
@@ -72,7 +72,7 @@ public class TTCraft extends JavaPlugin {
 	}
 
 	public void setDefaultMOTD() {
-		getConfig().set("MOTD", "Welcome back to $5123$fSMP!"); // TODO: player name?
+		getConfig().set("MOTD", "Welcome back to $5123$fSMP!");
 		saveConfig();
 	}
 

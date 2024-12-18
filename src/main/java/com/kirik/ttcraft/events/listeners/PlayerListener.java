@@ -1,14 +1,17 @@
 package com.kirik.ttcraft.events.listeners;
 
-import com.kirik.ttcraft.events.managers.PlayerManager;
-import com.kirik.ttcraft.main.TTCraft;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+import com.kirik.ttcraft.events.managers.PlayerManager;
+import com.kirik.ttcraft.main.TTCraft;
 
 public class PlayerListener implements Listener {
 
@@ -30,10 +33,6 @@ public class PlayerListener implements Listener {
 		}
 
 		String nickname = playerManager.getNickname(player);
-		if (nickname == "" || nickname == null) {
-			nickname = player.getName();
-		}
-
 		/* int level = playerManager.getLevel(player);
 		if (level >= 2) {
 			player.p
@@ -50,17 +49,18 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		playerManager.savePlayerConfig(e.getPlayer());
+		Player player = e.getPlayer();
+		playerManager.savePlayerConfig(player);
 
-		e.setQuitMessage("\u00a74[-] \u00a77" + playerManager.getNickname(e.getPlayer()) + " \u00a7edisconnected!");
+		String nickname = playerManager.getNickname(player);
+
+		e.setQuitMessage("\u00a74[-] \u00a77" + nickname + " \u00a7edisconnected!");
 	}
 
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		String nickname = playerManager.getNickname(e.getPlayer());
-
 		String colorMessage = e.getMessage().replace("$", "\u00a7");
-
 		e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
 	}
 
@@ -82,4 +82,12 @@ public class PlayerListener implements Listener {
 			plugin.sendServerMessage("\u00a7fCONSOLE banished " + playerManager.getNickname(e.getPlayer()));
 		}
 	}
+
+	// This works!! (Skill system)
+	/* @EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerBreakBlock(BlockBreakEvent e) {
+		if(e.getBlock().getType().name().equalsIgnoreCase("Stone")) {
+			e.getPlayer().sendMessage("Break");
+		}
+	} */
 }

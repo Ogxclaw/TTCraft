@@ -18,19 +18,39 @@ public class PlayerManager {
 		this.plugin = instance;
 	}
 
+	/**
+	 * getLevel - get level from player file
+	 * @param player - UUID for player config file
+	 * @return playerLevel - level of the player from config file (default 0) (mod 1) (admin 2)
+	 */
 	public int getLevel(Player player) {
 		int playerLevel = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getInt("level");
 		return playerLevel; // will auto-return 0 if "null"
 	}
 
+	/**
+	 * getNickname - get nickname of player from player file
+	 * @param player - UUID for player config file
+	 * @return playerNickname - +leading white color code for following text
+	 */
 	public String getNickname(Player player) {
 		String playerNickname = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getString("nickname");
-		if (playerNickname == null) {
-			return player.getName() + "\u00a7f";
+		if (playerNickname == null || playerNickname.equals("")) {
+			playerNickname = player.getName();
 		}
 		return playerNickname + "\u00a7f";
 	}
 
+	public int getSkillXP(Player player, String skillName) {
+		int skillXP = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getInt("skills." + skillName);
+		return skillXP;
+	}
+
+	/**
+	 * getHome - get location of player home
+	 * @param player - UUID for player config file
+	 * @return home - Location
+	 */
 	public Location getHome(Player player) {
 		Location home = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getLocation("home");
 		if (home == null) {
@@ -39,6 +59,11 @@ public class PlayerManager {
 		return home;
 	}
 
+	/**
+	 * getLastLocation - get location player was at BEFORE using a teleport command
+	 * @param player
+	 * @return lastLocation - Location
+	 */
 	public Location getLastLocation(Player player) {
 		Location lastLoc = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getLocation("lastLoc");
 		if (lastLoc == null) {
@@ -76,6 +101,18 @@ public class PlayerManager {
 			inv = getWorldInventory(player, worldName);
 		}
 		return inv;
+	}
+
+	public void setSkillXP(Player player, String skillName, int xp) {
+		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
+		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
+		playerConfig.set("skills." + skillName, xp);
+		playerConfigFile.savePlayerConfig();
+	}
+
+	public void addSkillXP(Player player, String skillName, int xpToAdd) {
+		int xp = getSkillXP(player, skillName);
+		setSkillXP(player, skillName, xp + xpToAdd);
 	}
 
 	public void setLevel(Player player, int level) {
@@ -132,12 +169,12 @@ public class PlayerManager {
 		sender.sendMessage("\u00a75[TT] \u00a7f" + msg);
 	}
 
-	public void sendException(Player player, TTCraftCommandException exception) {
-		player.sendMessage("\u00a7" + exception.getColor() + "[TT] \u00a7f" + exception.getMessage());
+	public void sendException(Player player, TTCraftCommandException e) {
+		player.sendMessage("\u00a7" + e.getColor() + "[TT] \u00a7f" + e.getMessage());
 	}
 
-	public void sendException(CommandSender sender, TTCraftCommandException exception) {
-		sender.sendMessage("\u00a7" + exception.getColor() + "[TT] \u00a7f" + exception.getMessage());
+	public void sendException(CommandSender sender, TTCraftCommandException e) {
+		sender.sendMessage("\u00a7" + e.getColor() + "[TT] \u00a7f" + e.getMessage());
 	}
 
 	public void savePlayerConfig(Player player) {
