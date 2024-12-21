@@ -41,11 +41,6 @@ public class PlayerManager {
 		return playerNickname + "\u00a7f";
 	}
 
-	public int getSkillXP(Player player, String skillName) {
-		int skillXP = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getInt("skills." + skillName);
-		return skillXP;
-	}
-
 	/**
 	 * getHome - get location of player home
 	 * @param player - UUID for player config file
@@ -101,18 +96,6 @@ public class PlayerManager {
 			inv = getWorldInventory(player, worldName);
 		}
 		return inv;
-	}
-
-	public void setSkillXP(Player player, String skillName, int xp) {
-		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
-		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
-		playerConfig.set("skills." + skillName, xp);
-		playerConfigFile.savePlayerConfig();
-	}
-
-	public void addSkillXP(Player player, String skillName, int xpToAdd) {
-		int xp = getSkillXP(player, skillName);
-		setSkillXP(player, skillName, xp + xpToAdd);
 	}
 
 	public void setLevel(Player player, int level) {

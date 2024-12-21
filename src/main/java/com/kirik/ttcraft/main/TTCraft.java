@@ -6,8 +6,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.kirik.ttcraft.commands.ICommand;
 import com.kirik.ttcraft.events.listeners.PlayerListener;
+import com.kirik.ttcraft.events.listeners.SkillListener;
 import com.kirik.ttcraft.events.managers.AFKManager;
 import com.kirik.ttcraft.events.managers.PlayerManager;
+import com.kirik.ttcraft.events.managers.SkillManager;
 import com.kirik.ttcraft.events.managers.WorldManager;
 
 /**
@@ -20,8 +22,11 @@ import com.kirik.ttcraft.events.managers.WorldManager;
 public class TTCraft extends JavaPlugin {
 
 	public static TTCraft instance;
+
 	public AFKManager afkManager;
 	public PlayerManager playerManager;
+	public SkillManager skillManager;
+
 	public WorldManager worldManager;
 
 	public TTCraft() {
@@ -45,6 +50,8 @@ public class TTCraft extends JavaPlugin {
 
 		playerManager = new PlayerManager(this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager), this);
+		skillManager = new SkillManager(this);
+		getServer().getPluginManager().registerEvents(new SkillListener(this, playerManager, skillManager), this);
 
 		worldManager = new WorldManager(this);
 
