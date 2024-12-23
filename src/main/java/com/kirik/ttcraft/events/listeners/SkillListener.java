@@ -2,8 +2,10 @@ package com.kirik.ttcraft.events.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.events.managers.SkillManager;
@@ -21,12 +23,29 @@ public class SkillListener implements Listener {
 		this.skillManager = skillManager;
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerTakeFallDamage(EntityDamageEvent e) {
-		if(e.getEntity() instanceof Player) {
-			Player player = (Player)e.getEntity();
-			String xp = "XP: " + skillManager.getSkillXP(player, "Acrobatics");
+
+		if(!(e.getEntity() instanceof Player)) return;
+
+		Player player = (Player)e.getEntity();
+		if(e.getCause() == DamageCause.FALL && !e.getEntity().isDead()) {
+
+			skillManager.addXP(player, "acrobatics", 10/*  * e.getDamage() */);
+
+			// eventually you'll need to make skills matter, reduce dmg taken!
+			// if(e.setDamage(e.getDamage() * (0.25 * )))
+
+			// String cause = "Cause: " + e.getCause().toString();
+			String xp = "Acrobatics XP: " + skillManager.getXP(player, "acrobatics");
+			String level = "Acrobatics Level: " + skillManager.getLevel(player, "acrobatics");
+
 			playerManager.sendMessage(player, xp);
+			playerManager.sendMessage(player, level);
+		}else if(e.getCause() == DamageCause.ENTITY_ATTACK) {
+
+			// debug, need player to wear armor to increase skill
+			playerManager.sendMessage(player, player.getInventory().getHelmet().getItemMeta().getDisplayName());
 		}
 	}
 

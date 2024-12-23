@@ -14,21 +14,29 @@ public class SkillManager {
 		this.plugin = instance;
 	}
 
-	public void setSkillXP(Player player, String skillName, int xp) {
+	public void setXP(Player player, String skillName, double xp) {
 		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set("skills." + skillName, xp);
 		playerConfigFile.savePlayerConfig();
 	}
 
-	public void addSkillXP(Player player, String skillName, int xpToAdd) {
-		int xp = getSkillXP(player, skillName);
-		setSkillXP(player, skillName, xp + xpToAdd);
+	public void addXP(Player player, String skillName, double xpToAdd) {
+		double xp = getXP(player, skillName);
+		setXP(player, skillName, xp + xpToAdd);
 	}
 
-	public int getSkillXP(Player player, String skillName) {
-		int skillXP = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getInt("skills." + skillName);
+	public double getXP(Player player, String skillName) {
+		double skillXP = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getDouble("skills." + skillName);
 		return skillXP;
+	}
+
+	// TODO: Make stardew valley type progression
+	// Levels 1 -> 10, small bonus each lvl, big bonus on 5 & 10
+	public int getLevel(Player player, String skillName) {
+		double skillXP = getXP(player, skillName);
+		int skillLevel = (int)(skillXP / 10);
+		return skillLevel;
 	}
 
 }

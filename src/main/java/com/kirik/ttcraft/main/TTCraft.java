@@ -50,8 +50,9 @@ public class TTCraft extends JavaPlugin {
 
 		playerManager = new PlayerManager(this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager), this);
-		skillManager = new SkillManager(this);
-		getServer().getPluginManager().registerEvents(new SkillListener(this, playerManager, skillManager), this);
+		
+		/* skillManager = new SkillManager(this);
+		getServer().getPluginManager().registerEvents(new SkillListener(this, playerManager, skillManager), this); */
 
 		worldManager = new WorldManager(this);
 
