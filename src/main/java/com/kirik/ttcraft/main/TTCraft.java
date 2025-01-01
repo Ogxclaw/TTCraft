@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.kirik.ttcraft.commands.ICommand;
 import com.kirik.ttcraft.events.listeners.PlayerListener;
-import com.kirik.ttcraft.events.listeners.SkillListener;
+import com.kirik.ttcraft.events.listeners.WorldListener;
 import com.kirik.ttcraft.events.managers.AFKManager;
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.events.managers.SkillManager;
@@ -35,33 +35,37 @@ public class TTCraft extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+
+		// load server config
 		saveResource("config.yml", false);
 		saveDefaultConfig();
 
+		// load MOTD (idk if this even works)
 		if (getMOTD() == null) {
 			setDefaultMOTD();
 			sendConsoleMsg("MOTD was NULL, loading default!");
 		}
 		sendConsoleMsg("Config Defaults Loaded");
-/* 
-		if (this.getServer().getWorld("creative") == null) {
-			this.sendConsoleMsg("[INFO]: Creative world does not exist, creating...");
-		} */
 
+		// load worldManager (WIP)
+		worldManager = new WorldManager(this);
+		getServer().getPluginManager().registerEvents(new WorldListener(this, worldManager), this);
+
+		// load playerManager & listener
 		playerManager = new PlayerManager(this);
-		getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager), this);
+		getServer().getPluginManager().registerEvents(new PlayerListener(this, playerManager, worldManager), this);
 		
+		// load skillManager & listener (WIP, disabled)
 		/* skillManager = new SkillManager(this);
 		getServer().getPluginManager().registerEvents(new SkillListener(this, playerManager, skillManager), this); */
 
-		worldManager = new WorldManager(this);
-
-		// TODO: dep/remove afkmanager, disabled for now
+		// load AFK tracker, run async
 		/* afkManager = new AFKManager(this);
 		getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
 		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute */
 		sendConsoleMsg("Listeners and Managers Loaded");
 
+		// load command system
 		ICommand.registerCommands();
 		StateContainer.loadAll();
 

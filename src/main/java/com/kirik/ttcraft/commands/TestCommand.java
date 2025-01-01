@@ -12,6 +12,7 @@ public class TestCommand extends ICommand {
 	@Override
 	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
+		plugin.getServer().dispatchCommand(sender, "tellraw test");
 		playerManager.sendMessage(sender, "test executed");
 		return true;
 	}

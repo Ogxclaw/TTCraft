@@ -1,5 +1,5 @@
 name: TTCraft
-version: 2.4
+version: 2.5
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.21
 authors: [Kazzius]
@@ -17,6 +17,9 @@ commands:
   home:
     description: Teleport player to their home
     usage: /home
+  invsee:
+    description: See the inventory of target player
+    usage: /invsee [target]
   kick:
     description: Kick player from server
     usage: /kick [player] <reason> 

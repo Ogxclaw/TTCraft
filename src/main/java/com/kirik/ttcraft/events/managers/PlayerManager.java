@@ -76,6 +76,11 @@ public class PlayerManager {
 		return lastLoc;
 	}
 
+	public boolean hasVisitedEnd(Player player) {
+		boolean visitedEnd = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getBoolean("visitedEnd");
+		return visitedEnd;
+	}
+
 	public ItemStack[] getWorldInventory(Player player, String worldName) {
 		ItemStack[] inv = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig()
 				.getList(worldName + ".inventory").toArray(new ItemStack[0]);
@@ -114,27 +119,41 @@ public class PlayerManager {
 		playerConfigFile.savePlayerConfig();
 	}
 
-	public void setHome(Player player, Location home) {
+	public void resetHome(Player player) {
+		setHome(player, player.getLocation());
+	}
+
+	private void setHome(Player player, Location home) {
 		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set("home", home);
 		playerConfigFile.savePlayerConfig();
-		
 	}
 
-	public void setLastLocation(Player player, Location lastLoc) {
+	public void resetLastLocation(Player player) {
+		setLastLocation(player, player.getLocation());
+	}
+
+	private void setLastLocation(Player player, Location lastLoc) {
 		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set("lastLoc", lastLoc);
 		playerConfigFile.savePlayerConfig();
 	}
 
-	public void setLastWorldLoc(Player player, String worldName, Location lastLoc) {
+	public void setVisitedEnd(Player player, boolean flag) {
+		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
+		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
+		playerConfig.set("visitedEnd", flag);
+		playerConfigFile.savePlayerConfig();
+	}
+
+	/* private void setLastWorldLoc(Player player, String worldName, Location lastLoc) {
 		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set(worldName, lastLoc);
 		playerConfigFile.savePlayerConfig();
-	}
+	} */
 
 	public void setWorldInventory(Player player, String worldName) {
 		PlayerConfiguration playerConfigFile = new PlayerConfiguration(player.getUniqueId());

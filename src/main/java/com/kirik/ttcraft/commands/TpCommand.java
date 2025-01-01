@@ -29,8 +29,7 @@ public class TpCommand extends ICommand {
 			if (!checkPermissions(player, target, true))
 				return true;
 
-			Location lastLoc = player.getLocation();
-			playerManager.setLastLocation(player, lastLoc);
+			playerManager.resetLastLocation(player);
 
 			player.teleport(target);
 			plugin.sendServerMessage(

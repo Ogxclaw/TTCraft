@@ -13,21 +13,10 @@ public class WhoCommand extends ICommand {
 
 	@Override
 	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
-
-		/*
-		 * int level = 999;
-		 * 
-		 * if(sender instanceof Player) {
-		 * level = playerManager.getLevel((Player)sender);
-		 * }
-		 */
-
-		// FIXME: this is backwards compared to literally all other commands
-		// its also poorly coded
+		// TODO: could be better, doesn't identify nicknames only usernames 
 		if (args.length > 0) {
 
 			Player target = plugin.getServer().getPlayer(args[0]);
-			StringBuilder info = new StringBuilder("Player info: ");
 			if (target == null) {
 				// check if using nickname
 				for (Player playerCheck : plugin.getServer().getOnlinePlayers()) {
@@ -49,16 +38,16 @@ public class WhoCommand extends ICommand {
 				}
 			}
 
-			info.append("\u00a7fUsername: " + target.getName());
-			info.append("\u00a7fNickname: " + playerManager.getNickname(target));
+			playerManager.sendMessage(sender, "Player info:");
+			playerManager.sendMessage(sender, "\u00a7fUsername: " + target.getName());
+			playerManager.sendMessage(sender, "\u00a7fNickname: " + playerManager.getNickname(target));
 			return true;
 		} else {
-
 			StringBuilder players = new StringBuilder();
 			for (Player player : plugin.getServer().getOnlinePlayers()) {
 				players.append(playerManager.getNickname(player) + ", ");
 			}
-			players = new StringBuilder(players.substring(0, players.length() - 2));
+			players = new StringBuilder(players.substring(0, players.length() - 2)); // remove trailing comma
 			playerManager.sendMessage(sender, "Online players: " + players.toString());
 			return true;
 		}

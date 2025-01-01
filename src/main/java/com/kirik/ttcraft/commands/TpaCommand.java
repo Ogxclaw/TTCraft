@@ -39,8 +39,7 @@ public class TpaCommand extends ICommand {
 
 			@Override
 			public void accept() {
-				Location prevLoc = byPlayer.getLocation();
-				playerManager.setLastLocation(byPlayer, prevLoc);
+				playerManager.resetLastLocation(byPlayer);
 				byPlayer.teleport(forPlayer);
 				playerManager.sendMessage(byPlayer, "Your teleportation request was accepted!");
 			}

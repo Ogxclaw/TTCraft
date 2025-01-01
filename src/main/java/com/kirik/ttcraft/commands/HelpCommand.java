@@ -36,16 +36,28 @@ public class HelpCommand extends ICommand {
 
 			// TODO: update
 			if (level >= 0) {
-				playerManager.sendMessage(sender,
-						"Note: You can use \u00a7d/help [command] \u00a7fto see description and usage of command");
-				playerManager.sendMessage(sender, "\u00a7d/help \u00a7f- this command");
+				/* playerManager.sendMessage(sender,
+						"Note: You can use \u00a7d/help [command] \u00a7fto see description and usage of command"); */
+				playerManager.sendMessage(sender, "\u00a7d/help [command] \u00a7f- details on any command");
 				playerManager.sendMessage(sender, "\u00a7d/home \u00a7f- teleport player to their home");
 				playerManager.sendMessage(sender, "\u00a7d/sethome \u00a7f- set player home");
 				playerManager.sendMessage(sender, "\u00a7d/setnick \u00a7f- set your nickname");
 				playerManager.sendMessage(sender, "\u00a7d/spawn \u00a7f- teleport player to server spawn");
 			}
-			if (level >= 2)
-				playerManager.sendMessage(sender,", back, ban, banish, kick, say, setlevel, setspawn, smite, summon, test, tp");
+			if (level >= 2) {
+				playerManager.sendMessage(sender, "\u00a7d################ ADMIN COMMANDS ################");
+				playerManager.sendMessage(sender, "\u00a7d/back \u00a7f- teleport player to previous location");
+				playerManager.sendMessage(sender, "\u00a7d/ban \u00a7f- ban target player");
+				playerManager.sendMessage(sender, "\u00a7d/banish \u00a7f- send target player to spawn");
+				playerManager.sendMessage(sender, "\u00a7d/kick \u00a7f- disconnect target player");
+				playerManager.sendMessage(sender, "\u00a7d/say \u00a7f- broadcast message from console");
+				playerManager.sendMessage(sender, "\u00a7d/setlevel \u00a7f- set target permission level");
+				playerManager.sendMessage(sender, "\u00a7d/setspawn \u00a7f- set world spawn location");
+				playerManager.sendMessage(sender, "\u00a7d/smite \u00a7f- smite target player (cosmetic)");
+				playerManager.sendMessage(sender, "\u00a7d/summon \u00a7f- teleport target to player");
+				playerManager.sendMessage(sender, "\u00a7d/test \u00a7f- who knows really");
+				playerManager.sendMessage(sender, "\u00a7d/tp \u00a7f- teleport to target player");
+			}
 			return true;
 		}
 	}

@@ -1,6 +1,7 @@
 package com.kirik.ttcraft.events.listeners;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,38 +10,44 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.kirik.ttcraft.events.managers.PlayerManager;
+import com.kirik.ttcraft.events.managers.WorldManager;
 import com.kirik.ttcraft.main.TTCraft;
 
+/**
+ * EventListener for Player Events
+ * 
+ */
 public class PlayerListener implements Listener {
 
 	private final TTCraft plugin;
 	private final PlayerManager playerManager;
+	private final WorldManager worldManager;
 
-	public PlayerListener(TTCraft plugin, PlayerManager manager) {
+	public PlayerListener(TTCraft plugin, PlayerManager playerManager, WorldManager worldManager) {
 		this.plugin = plugin;
-		playerManager = manager;
+		this.playerManager = playerManager;
+		this.worldManager = worldManager;
 	}
 
 	@EventHandler()
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-
-		if(!player.hasPlayedBefore()) { // make sure no first time spawn shenanigans
-			Location worldSpawn = player.getWorld().getSpawnLocation();
-			player.teleport(worldSpawn);
-		}
-
 		String nickname = playerManager.getNickname(player);
-		/* int level = playerManager.getLevel(player);
-		if (level >= 2) {
-			player.p
-		} */
 
-		e.setJoinMessage("\u00a72[+] \u00a77" + nickname + " \u00a7ejoined!");
-		player.setPlayerListName(nickname);
-		player.setDisplayName(nickname);
+		if(!player.hasPlayedBefore()) { // make sure no first time spawn shenanigans + unique welcome msg
+			// Location worldSpawn = player.getWorld().getSpawnLocation();
+			player.teleport(worldManager.getServerSpawn());
+
+			e.setJoinMessage("\u00a72[+] \u00a77" + player.getName() + " \u00a7ejoined for the first time!");
+		}else{
+			player.setPlayerListName(nickname);
+			player.setDisplayName(nickname);
+
+			e.setJoinMessage("\u00a72[+] \u00a77" + nickname + " \u00a7ejoined!");
+		}
 
 		String[] motd = plugin.getMOTD().replace("$", "\u00a7").split("(nl)");
 		for (String motdPiece : motd)
@@ -50,9 +57,9 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		Player player = e.getPlayer();
-		playerManager.savePlayerConfig(player);
-
 		String nickname = playerManager.getNickname(player);
+
+		playerManager.savePlayerConfig(player);
 
 		e.setQuitMessage("\u00a74[-] \u00a77" + nickname + " \u00a7edisconnected!");
 	}
@@ -61,33 +68,32 @@ public class PlayerListener implements Listener {
 	public void onPlayerChat(AsyncPlayerChatEvent e) {
 		String nickname = playerManager.getNickname(e.getPlayer());
 		String colorMessage = e.getMessage().replace("$", "\u00a7");
+
 		e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
 	}
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
-		/* if (e.getEntity().getRespawnLocation().getWorld().getName().startsWith("world")) {
-			e.getEntity().setGameMode(GameMode.SURVIVAL);
-		} */
+		Player player = (Player)e.getEntity();
+		playerManager.resetLastLocation(player);
 	}
 
 	@EventHandler
 	public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
-		if (e.getPlayer().getWorld().getName().contains("end")) {
+		//TODO: bans the end, remove BEFORE ender dragon fight (1/5)
+		Player player = e.getPlayer();
 
-			Location targetLastLoc = e.getPlayer().getLocation();
-			playerManager.setLastLocation(e.getPlayer(), targetLastLoc);
+		// if player enters the end, banish them and give them 6 shulker shells
+		if (player.getWorld() == worldManager.getEnd()) {
 
-			e.getPlayer().teleport(plugin.getConfig().getLocation("world"));
-			plugin.sendServerMessage("\u00a7fCONSOLE banished " + playerManager.getNickname(e.getPlayer()));
+			player.teleport(worldManager.getServerSpawn());
+			plugin.sendServerMessage("\u00a7fCONSOLE banished " + playerManager.getNickname(player));
+
+			// if player has not gone through portal before, they get shells
+			if(!playerManager.hasVisitedEnd(player)) {
+				player.getInventory().addItem(new ItemStack(Material.SHULKER_SHELL, 6));
+				playerManager.setVisitedEnd(player, true);
+			}
 		}
 	}
-
-	// This works!! (Skill system)
-	/* @EventHandler(priority = EventPriority.MONITOR)
-	public void onPlayerBreakBlock(BlockBreakEvent e) {
-		if(e.getBlock().getType().name().equalsIgnoreCase("Stone")) {
-			e.getPlayer().sendMessage("Break");
-		}
-	} */
 }

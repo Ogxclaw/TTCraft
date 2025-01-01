@@ -2,6 +2,7 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\command
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\AFKManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\RequestManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\HomeCommand.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\listeners\WorldListener.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\TTCraft.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PlayerNotFoundException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SetSpawnCommand.java
@@ -18,6 +19,7 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\PlayerManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\managers\SkillManager.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\PlayerConfiguration.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\InvSeeCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\Utils.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\TpAcceptCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\BanishCommand.java

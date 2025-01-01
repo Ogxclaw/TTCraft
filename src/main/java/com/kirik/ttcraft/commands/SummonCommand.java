@@ -28,8 +28,7 @@ public class SummonCommand extends ICommand {
 		if (!checkPermissions(player, target, false))
 			return true;
 
-		Location targetLastLoc = target.getLocation();
-		playerManager.setLastLocation(target, targetLastLoc);
+		playerManager.resetLastLocation(target);
 
 		target.teleport(player);
 		plugin.sendServerMessage(

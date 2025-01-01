@@ -13,11 +13,9 @@ public class HomeCommand extends ICommand {
 
 	@Override
 	public boolean asPlayer(Player player, Command command, String s, String[] args) throws TTCraftCommandException {
+		playerManager.resetLastLocation(player);
 
 		Location home = playerManager.getHome(player);
-		Location lastLoc = player.getLocation();
-
-		playerManager.setLastLocation(player, lastLoc);
 		player.teleport(home);
 
 		playerManager.sendMessage(player, "Teleported home");

@@ -12,6 +12,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import com.kirik.ttcraft.events.managers.PlayerManager;
+import com.kirik.ttcraft.events.managers.WorldManager;
 import com.kirik.ttcraft.main.TTCraft;
 import com.kirik.ttcraft.main.util.PermissionDeniedException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
@@ -31,6 +32,7 @@ public abstract class ICommand implements TabExecutor/* , TabCompleter */ {
 
 	protected static TTCraft plugin = TTCraft.instance;
 	protected static PlayerManager playerManager = plugin.playerManager;
+	protected static WorldManager worldManager = plugin.worldManager;
 
 	@Override
 	public final boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
