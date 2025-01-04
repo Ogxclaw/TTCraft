@@ -81,6 +81,11 @@ public class PlayerManager {
 		return visitedEnd;
 	}
 
+	public boolean isAFK(Player player) {
+		boolean afkFlag = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getBoolean("isAFK");
+		return afkFlag;
+	}
+
 	public ItemStack[] getWorldInventory(Player player, String worldName) {
 		ItemStack[] inv = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig()
 				.getList(worldName + ".inventory").toArray(new ItemStack[0]);
@@ -146,6 +151,13 @@ public class PlayerManager {
 		FileConfiguration playerConfig = playerConfigFile.getPlayerConfig();
 		playerConfig.set("visitedEnd", flag);
 		playerConfigFile.savePlayerConfig();
+	}
+
+	public void setAFK(Player player, boolean flag) {
+		PlayerConfiguration pcf = new PlayerConfiguration(player.getUniqueId());
+		FileConfiguration cf = pcf.getPlayerConfig();
+		cf.set("isAFK", flag);
+		pcf.savePlayerConfig();
 	}
 
 	/* private void setLastWorldLoc(Player player, String worldName, Location lastLoc) {

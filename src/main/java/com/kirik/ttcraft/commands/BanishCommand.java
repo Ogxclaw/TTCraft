@@ -1,16 +1,16 @@
 package com.kirik.ttcraft.commands;
 
-import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.util.PlayerNotFoundException;
-import com.kirik.ttcraft.main.util.TTCraftCommandException;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.kirik.ttcraft.commands.ICommand.Level;
+import com.kirik.ttcraft.commands.ICommand.Name;
+import com.kirik.ttcraft.main.util.PlayerNotFoundException;
+import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("banish")
 @Level(2)

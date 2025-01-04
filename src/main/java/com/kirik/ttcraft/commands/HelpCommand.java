@@ -38,17 +38,25 @@ public class HelpCommand extends ICommand {
 			if (level >= 0) {
 				/* playerManager.sendMessage(sender,
 						"Note: You can use \u00a7d/help [command] \u00a7fto see description and usage of command"); */
-				playerManager.sendMessage(sender, "\u00a7d/help [command] \u00a7f- details on any command");
+				playerManager.sendMessage(sender, "\u00a7d/help \u00a7f[\u00a7dcommand\u00a7f] - details on any command");
 				playerManager.sendMessage(sender, "\u00a7d/home \u00a7f- teleport player to their home");
 				playerManager.sendMessage(sender, "\u00a7d/sethome \u00a7f- set player home");
 				playerManager.sendMessage(sender, "\u00a7d/setnick \u00a7f- set your nickname");
 				playerManager.sendMessage(sender, "\u00a7d/spawn \u00a7f- teleport player to server spawn");
 			}
+			if(level >= 1) {
+				playerManager.sendMessage(sender, "\u00a7d################ MOD COMMANDS ################");
+				playerManager.sendMessage(sender, "\u00a7d/time \u00a7f-set server time");
+				playerManager.sendMessage(sender, "\u00a7d/tpa \u00a7f- send teleport request to target");
+				playerManager.sendMessage(sender, "\u00a7d/tpaccept \u00a7f-accept teleport request from player");
+				playerManager.sendMessage(sender, "\u00a7d/tpdeny \u00a7f-deny teleport request from player");
+				playerManager.sendMessage(sender, "\u00a7d/weather \u00a7f-set server weather");
+			}
 			if (level >= 2) {
 				playerManager.sendMessage(sender, "\u00a7d################ ADMIN COMMANDS ################");
 				playerManager.sendMessage(sender, "\u00a7d/back \u00a7f- teleport player to previous location");
-				playerManager.sendMessage(sender, "\u00a7d/ban \u00a7f- ban target player");
 				playerManager.sendMessage(sender, "\u00a7d/banish \u00a7f- send target player to spawn");
+				playerManager.sendMessage(sender, "\u00a7d/invsee \u00a7f- see target player's inventory");
 				playerManager.sendMessage(sender, "\u00a7d/kick \u00a7f- disconnect target player");
 				playerManager.sendMessage(sender, "\u00a7d/say \u00a7f- broadcast message from console");
 				playerManager.sendMessage(sender, "\u00a7d/setlevel \u00a7f- set target permission level");

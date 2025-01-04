@@ -1,14 +1,15 @@
 package com.kirik.ttcraft.events.listeners;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -78,13 +79,21 @@ public class PlayerListener implements Listener {
 		playerManager.resetLastLocation(player);
 	}
 
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onPlayerMove(PlayerMoveEvent e) {
+		if(playerManager.isAFK(e.getPlayer())) { // if player is moving while afk, return them
+			plugin.sendServerMessage(playerManager.getNickname(e.getPlayer()) + " returned from being AFK");
+			playerManager.setAFK(e.getPlayer(), false);
+		}
+	}
+
 	@EventHandler
 	public void onPlayerChangeWorld(PlayerChangedWorldEvent e) {
 		//TODO: bans the end, remove BEFORE ender dragon fight (1/5)
 		Player player = e.getPlayer();
 
 		// if player enters the end, banish them and give them 6 shulker shells
-		if (player.getWorld() == worldManager.getEnd()) {
+		if (player.getWorld().getName().contains("end")) {
 
 			player.teleport(worldManager.getServerSpawn());
 			plugin.sendServerMessage("\u00a7fCONSOLE banished " + playerManager.getNickname(player));

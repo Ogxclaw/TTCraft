@@ -1,6 +1,5 @@
 package com.kirik.ttcraft.commands;
 
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
@@ -12,7 +11,7 @@ import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("tpa")
-@Level(2)
+@Level(1)
 public class TpaCommand extends ICommand {
 
 	@Override

@@ -1,10 +1,13 @@
 name: TTCraft
-version: 2.5
+version: 2.5.2
 main: com.kirik.ttcraft.main.TTCraft
 api-version: 1.21
 authors: [Kazzius]
 description: Paper Plugin for Theta Tau Minecraft Server
 commands:
+  afk:
+    description: Toggle AFK Status
+    usage: /afk
   back:
     description: Teleport player to last saved location
     usage: /back
@@ -61,10 +64,10 @@ commands:
     usage: /tpa [target]
   tpaccept:
     description: Accept teleport request from player
-    usage: /tpaccept <player>
+    usage: /tpaccept [player]
   tpdeny:
     description: Decline teleport request from player
-    usage: /tpdeny <player>
+    usage: /tpdeny [player]
   weather:
     description: set weather on the server (global)
     usage: /weather [clear|rain|thunderstorm]
