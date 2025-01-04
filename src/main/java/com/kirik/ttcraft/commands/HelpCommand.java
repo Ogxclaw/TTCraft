@@ -39,6 +39,7 @@ public class HelpCommand extends ICommand {
 				/* playerManager.sendMessage(sender,
 						"Note: You can use \u00a7d/help [command] \u00a7fto see description and usage of command"); */
 				playerManager.sendMessage(sender, "\u00a7d/help \u00a7f[\u00a7dcommand\u00a7f] - details on any command");
+				playerManager.sendMessage(sender, "\u00a7d/afk \u00a7f- toggle AFK status");
 				playerManager.sendMessage(sender, "\u00a7d/home \u00a7f- teleport player to their home");
 				playerManager.sendMessage(sender, "\u00a7d/sethome \u00a7f- set player home");
 				playerManager.sendMessage(sender, "\u00a7d/setnick \u00a7f- set your nickname");

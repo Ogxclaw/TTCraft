@@ -81,9 +81,12 @@ public class PlayerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerMove(PlayerMoveEvent e) {
-		if(playerManager.isAFK(e.getPlayer())) { // if player is moving while afk, return them
-			plugin.sendServerMessage(playerManager.getNickname(e.getPlayer()) + " returned from being AFK");
-			playerManager.setAFK(e.getPlayer(), false);
+		Player player = e.getPlayer();
+
+		if(playerManager.isAFK(player)) { // if player is moving while afk, return them
+			plugin.sendServerMessage(playerManager.getNickname(player) + " returned from being AFK");
+			playerManager.setAFK(player, false);
+			player.setPlayerListName(playerManager.getNickname(player));
 		}
 	}
 

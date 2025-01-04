@@ -40,6 +40,7 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\packets
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PermissionDeniedException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\WhoCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\AbstractPacket.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\AfkCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\SayCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\HelpCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\events\tasks\AFKTask.java

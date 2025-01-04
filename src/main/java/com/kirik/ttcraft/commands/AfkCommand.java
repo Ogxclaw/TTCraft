@@ -19,7 +19,7 @@ public class AfkCommand extends ICommand {
 		playerManager.setAFK(player, !playerManager.isAFK(player));
 		boolean afkStatus = playerManager.isAFK(player);
 		if(afkStatus) { // player is now afk
-			plugin.sendServerMessage(playerManager.getNickname(player) + " went \u00a77AFK");
+			plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a77went AFK");
 			player.setPlayerListName("\u00a77[AFK] " + playerManager.getNickname(player));
 		}else{
 			plugin.sendServerMessage(playerManager.getNickname(player) + " returned from being AFK");
