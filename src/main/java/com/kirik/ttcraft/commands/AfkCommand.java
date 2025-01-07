@@ -17,14 +17,15 @@ public class AfkCommand extends ICommand {
 
 		Player player = (Player)sender;
 		playerManager.setAFK(player, !playerManager.isAFK(player));
-		boolean afkStatus = playerManager.isAFK(player);
-		if(afkStatus) { // player is now afk
+
+		if(playerManager.isAFK(player)) { // if player is now afk
 			plugin.sendServerMessage(playerManager.getNickname(player) + " \u00a77went AFK");
 			player.setPlayerListName("\u00a77[AFK] " + playerManager.getNickname(player));
 		}else{
 			plugin.sendServerMessage(playerManager.getNickname(player) + " returned from being AFK");
 			player.setPlayerListName(playerManager.getNickname(player));
 		}
+		
 		return true;
 	}
 }

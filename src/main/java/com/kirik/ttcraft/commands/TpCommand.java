@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
@@ -31,7 +32,7 @@ public class TpCommand extends ICommand {
 
 			playerManager.resetLastLocation(player);
 
-			player.teleport(target);
+			player.teleport(target, TeleportCause.COMMAND);
 			plugin.sendServerMessage(
 					playerManager.getNickname(player) + " \u00a7fteleported to " + playerManager.getNickname(target));
 			return true;

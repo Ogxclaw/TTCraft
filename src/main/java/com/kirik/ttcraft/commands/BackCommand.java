@@ -3,6 +3,7 @@ package com.kirik.ttcraft.commands;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
@@ -19,7 +20,7 @@ public class BackCommand extends ICommand {
 			return true;
 
 		Location lastLoc = playerManager.getLastLocation(player);
-		player.teleport(lastLoc);
+		player.teleport(lastLoc, TeleportCause.COMMAND);
 		playerManager.sendMessage(player, "Sent back to last location");
 		return true;
 	}

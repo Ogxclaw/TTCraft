@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
@@ -38,7 +39,7 @@ public class BanishCommand extends ICommand {
 
 			playerManager.resetLastLocation(target);
 
-			target.teleport(worldManager.getServerSpawn());
+			target.teleport(worldManager.getServerSpawn(), TeleportCause.COMMAND);
 			plugin.sendServerMessage(nickname + " banished " + playerManager.getNickname(target));
 			return true;
 		} else

@@ -2,15 +2,18 @@ package com.kirik.ttcraft.main;
 
 import java.util.logging.Level;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.kirik.ttcraft.commands.ICommand;
+import com.kirik.ttcraft.events.listeners.AFKListener;
 import com.kirik.ttcraft.events.listeners.PlayerListener;
 import com.kirik.ttcraft.events.listeners.WorldListener;
 import com.kirik.ttcraft.events.managers.AFKManager;
 import com.kirik.ttcraft.events.managers.PlayerManager;
 import com.kirik.ttcraft.events.managers.SkillManager;
 import com.kirik.ttcraft.events.managers.WorldManager;
+import com.kirik.ttcraft.events.tasks.AFKTask;
 
 /**
  * TTCraft is a custom plugin 
@@ -60,9 +63,9 @@ public class TTCraft extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new SkillListener(this, playerManager, skillManager), this); */
 
 		// load AFK tracker, run async
-		/* afkManager = new AFKManager(this);
+		afkManager = new AFKManager(this, playerManager);
 		getServer().getPluginManager().registerEvents(new AFKListener(this, this.afkManager), this);
-		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute */
+		Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AFKTask(this, this.afkManager), 0L, 1200L); // ping every 1 minute
 		sendConsoleMsg("Listeners and Managers Loaded");
 
 		// load command system

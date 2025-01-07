@@ -11,23 +11,25 @@ import com.kirik.ttcraft.main.TTCraft;
 public class AFKManager {
 
 	private final TTCraft plugin;
+	private final PlayerManager playerManager;
 
 	private static final HashMap<Player, Long> lastMovement = new HashMap<Player, Long>();
 	private static final long MOVEMENT_THRESHOLD = 600000; // 10 minutes(?)
 
-	public AFKManager(TTCraft plugin) {
+	public AFKManager(TTCraft plugin, PlayerManager playerManager) {
 		this.plugin = plugin;
+		this.playerManager = playerManager;
 	}
 
-	public static void playerJoined(Player player) {
+	public void playerJoined(Player player) {
 		lastMovement.put(player, System.currentTimeMillis());
 	}
 
-	public static void playerQuit(Player player) {
+	public void playerQuit(Player player) {
 		lastMovement.remove(player);
 	}
 
-	public static void playerMove(Player player) {
+	public void playerMove(Player player) {
 		// long lastMovementTime = lastMovement.get(e.getPlayer());
 
 		if (!player.isInWater() && !player.isSwimming()) { // TODO: afk pools, this is a bad solution
@@ -56,9 +58,11 @@ public class AFKManager {
 			if (isAFK(entry.getKey())) {
 				Bukkit.getScheduler().runTask(plugin, new Runnable() {
 					public void run() {
-						entry.getKey().kickPlayer("[TT] Kicked by CONSOLE (AFK)");
-						plugin.sendServerMessage(
-								"CONSOLE kicked " + plugin.playerManager.getNickname(entry.getKey()) + " \u00a7f(AFK)");
+						playerManager.setAFK(entry.getKey(), true);
+						plugin.sendServerMessage(playerManager.getNickname(entry.getKey()) + " \u00a77went AFK");
+
+						// entry.getKey().kickPlayer("[TT] Kicked by CONSOLE (AFK)");
+						// plugin.sendServerMessage("CONSOLE kicked " + plugin.playerManager.getNickname(entry.getKey()) + " \u00a7f(AFK)");
 					}
 				});
 			}

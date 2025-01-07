@@ -2,6 +2,7 @@ package com.kirik.ttcraft.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
@@ -39,7 +40,7 @@ public class TpaCommand extends ICommand {
 			@Override
 			public void accept() {
 				playerManager.resetLastLocation(byPlayer);
-				byPlayer.teleport(forPlayer);
+				byPlayer.teleport(forPlayer, TeleportCause.COMMAND);
 				playerManager.sendMessage(byPlayer, "Your teleportation request was accepted!");
 			}
 

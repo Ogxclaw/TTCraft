@@ -2,6 +2,7 @@ package com.kirik.ttcraft.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.kirik.ttcraft.commands.ICommand.Level;
 import com.kirik.ttcraft.commands.ICommand.Name;
@@ -21,7 +22,7 @@ public class SpawnCommand extends ICommand {
 		/* if(player.getWorld() != plugin.getServer().getWorld("world"))
 			worldSpawn.setWorld(plugin.getServer().getWorld("world")); */
 
-		player.teleport(worldManager.getServerSpawn());
+		player.teleport(worldManager.getServerSpawn(), TeleportCause.COMMAND);
 
 		playerManager.sendMessage(player, "Teleported to spawn");
 		return true;

@@ -47,11 +47,11 @@ public class HelpCommand extends ICommand {
 			}
 			if(level >= 1) {
 				playerManager.sendMessage(sender, "\u00a7d################ MOD COMMANDS ################");
-				playerManager.sendMessage(sender, "\u00a7d/time \u00a7f-set server time");
+				playerManager.sendMessage(sender, "\u00a7d/time \u00a7f- set server time");
 				playerManager.sendMessage(sender, "\u00a7d/tpa \u00a7f- send teleport request to target");
-				playerManager.sendMessage(sender, "\u00a7d/tpaccept \u00a7f-accept teleport request from player");
-				playerManager.sendMessage(sender, "\u00a7d/tpdeny \u00a7f-deny teleport request from player");
-				playerManager.sendMessage(sender, "\u00a7d/weather \u00a7f-set server weather");
+				playerManager.sendMessage(sender, "\u00a7d/tpaccept \u00a7f- accept teleport request from player");
+				playerManager.sendMessage(sender, "\u00a7d/tpdeny \u00a7f- deny teleport request from player");
+				playerManager.sendMessage(sender, "\u00a7d/weather \u00a7f- set server weather");
 			}
 			if (level >= 2) {
 				playerManager.sendMessage(sender, "\u00a7d################ ADMIN COMMANDS ################");
