@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("time")
-@Level(1)
+@Level(2)
 public class TimeCommand extends ICommand {
 
 	@Override

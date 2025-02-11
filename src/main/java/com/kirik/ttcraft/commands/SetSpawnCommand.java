@@ -8,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 @Name("setspawn")
-@Level(2)
+@Level(3)
 public class SetSpawnCommand extends ICommand {
 
 	@Override

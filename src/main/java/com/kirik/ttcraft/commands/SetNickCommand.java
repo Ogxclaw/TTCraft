@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("setnick")
-@Level(0)
+@Level(1)
 public class SetNickCommand extends ICommand {
 
 	@Override

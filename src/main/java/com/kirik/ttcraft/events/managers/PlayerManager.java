@@ -36,7 +36,7 @@ public class PlayerManager {
 	public String getNickname(Player player) {
 		String playerNickname = new PlayerConfiguration(player.getUniqueId()).getPlayerConfig().getString("nickname");
 		if (playerNickname == null || playerNickname.equals("")) {
-			playerNickname = player.getName();
+			playerNickname = getLevelColor(player) + player.getName();
 		}
 		return playerNickname + "\u00a7f";
 	}
@@ -74,6 +74,22 @@ public class PlayerManager {
 			lastLoc = plugin.getServer().getWorld(worldName).getSpawnLocation();
 		}
 		return lastLoc;
+	}
+
+	public String getLevelColor(Player player) {
+		int level = getLevel(player);
+		switch(level) {
+			case 0:
+				return "\u00a70";
+			case 1:
+				return "\u00a77";
+			case 2:
+				return "\u00a7b";
+			case 3:
+				return "\u00a75";
+			default:
+				return "\u00a7f";
+		}
 	}
 
 	public boolean hasVisitedEnd(Player player) {

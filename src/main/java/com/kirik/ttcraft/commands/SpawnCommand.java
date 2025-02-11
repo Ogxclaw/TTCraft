@@ -9,7 +9,7 @@ import com.kirik.ttcraft.commands.ICommand.Name;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("spawn")
-@Level(0)
+@Level(1)
 public class SpawnCommand extends ICommand {
 
 	@Override

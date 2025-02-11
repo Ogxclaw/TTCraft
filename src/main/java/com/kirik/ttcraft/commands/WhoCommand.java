@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("who")
-@Level(2)
+@Level(1)
 public class WhoCommand extends ICommand {
 
 	@Override
@@ -41,6 +41,7 @@ public class WhoCommand extends ICommand {
 			playerManager.sendMessage(sender, "Player info:");
 			playerManager.sendMessage(sender, "\u00a7fUsername: " + target.getName());
 			playerManager.sendMessage(sender, "\u00a7fNickname: " + playerManager.getNickname(target));
+			playerManager.sendMessage(sender, "\u00a7fLevel: " + playerManager.getLevel(target));
 			return true;
 		} else {
 			StringBuilder players = new StringBuilder();

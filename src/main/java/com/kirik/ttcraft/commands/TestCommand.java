@@ -1,9 +1,11 @@
 package com.kirik.ttcraft.commands;
 
-import com.kirik.ttcraft.commands.ICommand.*;
-import com.kirik.ttcraft.main.util.TTCraftCommandException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+
+import com.kirik.ttcraft.commands.ICommand.Level;
+import com.kirik.ttcraft.commands.ICommand.Name;
+import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("test")
 @Level(2)
@@ -12,9 +14,9 @@ public class TestCommand extends ICommand {
 	@Override
 	public boolean run(CommandSender sender, Command command, String s, String[] args) throws TTCraftCommandException {
 
-		plugin.getServer().dispatchCommand(sender, "tellraw test");
-		playerManager.sendMessage(sender, "test executed");
-		return true;
+		// plugin.getServer().dispatchCommand(sender, "tellraw test");
+
+		return false;
 	}
 }
 

@@ -12,7 +12,7 @@ import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("tpa")
-@Level(1)
+@Level(2)
 public class TpaCommand extends ICommand {
 
 	@Override

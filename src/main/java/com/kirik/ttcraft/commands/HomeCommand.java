@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 @Name("home")
-@Level(0)
+@Level(1)
 public class HomeCommand extends ICommand {
 
 	@Override

@@ -37,6 +37,7 @@ e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\command
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\TestCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\KickCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\packets\WrapperPlayServerScoreboardTeam.java
+e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\AuthCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\PermissionDeniedException.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\commands\WhoCommand.java
 e:\Programming\Minecraft Plugins\TTCraft\src\main\java\com\kirik\ttcraft\main\util\AbstractPacket.java

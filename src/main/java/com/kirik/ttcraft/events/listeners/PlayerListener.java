@@ -1,5 +1,6 @@
 package com.kirik.ttcraft.events.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,17 +40,25 @@ public class PlayerListener implements Listener {
 			// Location worldSpawn = player.getWorld().getSpawnLocation();
 			player.teleport(worldManager.getServerSpawn());
 
-			e.setJoinMessage("\u00a72[+] \u00a77" + player.getName() + " \u00a7ejoined for the first time!");
+			player.setGameMode(GameMode.ADVENTURE);
+			playerManager.setLevel(player, 0);
+
+			e.setJoinMessage("\u00a72[+] \u00a7f" + player.getName() + " \u00a7ejoined for the first time!");
 		}else{
 			player.setPlayerListName(nickname);
 			player.setDisplayName(nickname);
 
-			e.setJoinMessage("\u00a72[+] \u00a77" + nickname + " \u00a7ejoined!");
+			e.setJoinMessage("\u00a72[+] " + nickname + " \u00a7ejoined!");
 		}
 
 		String[] motd = plugin.getMOTD().replace("$", "\u00a7").split("(nl)");
 		for (String motdPiece : motd)
 			playerManager.sendMessage(player, motdPiece);
+
+		if(playerManager.getLevel(player) == 0) {
+			player.setGameMode(GameMode.ADVENTURE);
+			playerManager.sendMessage(player, "Please use /auth [password] to interact!");
+		}
 	}
 
 	@EventHandler
@@ -67,7 +76,7 @@ public class PlayerListener implements Listener {
 		String nickname = playerManager.getNickname(e.getPlayer());
 		String colorMessage = e.getMessage().replace("$", "\u00a7");
 
-		e.setFormat("\u00a77" + nickname + "\u00a7f: " + colorMessage);
+		e.setFormat("\u00a77" + nickname + ": \u00a7f" + colorMessage);
 	}
 
 	@EventHandler

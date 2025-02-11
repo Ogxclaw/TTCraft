@@ -13,7 +13,7 @@ import com.kirik.ttcraft.main.util.PlayerNotFoundException;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("setlevel")
-@Level(2)
+@Level(3)
 public class SetLevelCommand extends ICommand {
 
 	@Override

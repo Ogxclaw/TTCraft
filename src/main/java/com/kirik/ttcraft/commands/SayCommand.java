@@ -11,7 +11,7 @@ import com.kirik.ttcraft.commands.ICommand.*;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("say")
-@Level(2)
+@Level(3)
 public class SayCommand extends ICommand {
 
 	@Override

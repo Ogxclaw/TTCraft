@@ -52,7 +52,7 @@ public class TTCraft extends JavaPlugin {
 
 		// load worldManager (WIP)
 		worldManager = new WorldManager(this);
-		getServer().getPluginManager().registerEvents(new WorldListener(this, worldManager), this);
+		getServer().getPluginManager().registerEvents(new WorldListener(this, playerManager, worldManager), this);
 
 		// load playerManager & listener
 		playerManager = new PlayerManager(this);

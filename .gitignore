@@ -24,6 +24,9 @@
 hs_err_pid*
 replay_pid*
 
+# env/auth files
+*\auth.txt
+
 # editor files
 .vscode/*
 target/classes/com/kirik/ttcraft/commands/HelpCommand.class

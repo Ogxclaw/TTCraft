@@ -8,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 @Name("sethome")
-@Level(0)
+@Level(1)
 public class SetHomeCommand extends ICommand {
 
 	@Override

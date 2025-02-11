@@ -8,6 +8,9 @@ commands:
   afk:
     description: Toggle AFK Status
     usage: /afk
+  auth:
+    description: Activate account to play on the server
+    usage: /auth [password]
   back:
     description: Teleport player to last saved location
     usage: /back

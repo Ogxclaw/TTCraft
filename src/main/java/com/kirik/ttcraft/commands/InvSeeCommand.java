@@ -8,7 +8,7 @@ import com.kirik.ttcraft.commands.ICommand.Name;
 import com.kirik.ttcraft.main.util.TTCraftCommandException;
 
 @Name("invsee")
-@Level(2)
+@Level(3)
 public class InvSeeCommand extends ICommand {
 
 	@Override

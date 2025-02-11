@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Name("weather")
-@Level(1)
+@Level(2)
 public class WeatherCommand extends ICommand {
 
 	@Override
